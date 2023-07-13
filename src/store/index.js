@@ -3,15 +3,19 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+const store = new Vuex.Store({
+    state: {
+        components: {
+            systemBar: true,
+        },
+    },
+    getters: {},
+    mutations: {
+        setSystemBarVisible(state) {
+            state.components.systemBar = !state.components.systemBar
+        },
+    },
+    actions: {},
+    modules: {},
 })
+export default store
