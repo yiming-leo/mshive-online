@@ -6,7 +6,12 @@
         <v-content class="py-0 text-capitalize">{{ account.username }}</v-content>
       </v-btn>
       <v-divider vertical></v-divider>
-      <v-btn v-for="link in navbarLinks" :key="link.index" text class="ml-3 font-weight-bold">{{ link.text }}</v-btn>
+      <v-btn-toggle borderless group dense tile color="primary" v-model="selectedItem">
+        <v-btn v-for="link in navbarLinks" :key="link.index" text :href="link.link"
+               class="ml-3 font-weight-bold rounded-l rounded-r">
+          {{ link.text }}
+        </v-btn>
+      </v-btn-toggle>
       <v-spacer></v-spacer>
       <v-responsive min-width="100" max-width="260">
         <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
@@ -20,8 +25,8 @@
         </template>
         <v-list>
           <!--<v-subheader>Select Languages</v-subheader>-->
-          <v-list-item v-for="(languageItem, index) in languageList" :key="index" link>
-            <v-list-item-icon>
+          <v-list-item dense v-for="(languageItem, index) in languageList" :key="index" link class="pl-0">
+            <v-list-item-icon class="mx-2">
               <v-icon :class="'fi fi-'+ languageItem.flag +' translate-item-icon'"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>{{ languageItem.name }}</v-list-item-content>
@@ -41,8 +46,9 @@ export default {
     navbarLinks: [
       {index: 1, text: 'Dashboard', link: ""},
       {index: 2, text: 'Message', link: ""},
-      {index: 3, text: 'Export', link: ""},
-      {index: 4, text: 'Official Web', link: ""},
+      {index: 3, text: 'Extend', link: ""},
+      {index: 4, text: 'Export', link: ""},
+      {index: 5, text: 'Official Web', link: "http://49.235.113.96:8081"},
     ],
     languageList: [
       {index: 1, lang: "zh_cn", name: "简体中文", flag: "cn"},
@@ -54,7 +60,7 @@ export default {
       {index: 7, lang: "ar", name: "بالعربية", flag: "sa"},
       {index: 8, lang: "ru", name: "Русский", flag: "ru"},
     ],
-    closeOnClick: true,
+    selectedItem: 0,
   })
 }
 </script>

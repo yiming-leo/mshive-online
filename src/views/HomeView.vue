@@ -21,7 +21,6 @@
 import NavigationBar from "@/components/NavigationBar.vue";
 import MenuList from "@/components/MenuList.vue";
 import SystemBar from "@/components/SystemBar.vue";
-import {mapMutations} from "vuex";
 
 export default {
   name: 'Home',
@@ -32,9 +31,6 @@ export default {
   },
   data: () => ({}),
   methods: {
-    ...mapMutations([
-      'setSystemBarVisible',
-    ]),
   },
 }
 </script>

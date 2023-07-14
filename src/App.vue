@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!--系统栏-->
     <v-slide-y-transition>
       <SystemBar v-if="systemBarVisible"></SystemBar>
     </v-slide-y-transition>
