@@ -10,7 +10,7 @@
       <v-divider vertical></v-divider>
       <v-btn-toggle borderless group dense tile color="primary" v-model="selectedItem">
         <!--nav buttons-->
-        <v-btn v-for="link in navbarLinks" :key="link.index" text :href="link.link"
+        <v-btn v-for="link in navbarLinks" :key="link.index" text :href="link.link" retain-focus-on-click
                @click="switchNavbarButton(link.index)" class="ml-3 font-weight-bold rounded-l rounded-r">
           {{ link.text }}
         </v-btn>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import router from "@/router";
 import store from "../store/index.js";
 import {mapMutations} from "vuex";
 

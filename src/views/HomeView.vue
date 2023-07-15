@@ -5,10 +5,10 @@
       <v-container>
         <v-row>
           <v-col cols="2">
-            <MenuList v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
+            <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
           </v-col>
           <v-col cols="10">
-            <v-scroll-x-transition mode="out-in">
+            <v-scroll-y-transition mode="out-in">
               <HouseView v-if="funcButtonState === 1"></HouseView>
               <RoomView v-else-if="funcButtonState === 2"></RoomView>
               <FurnitureView v-else-if="funcButtonState === 3"></FurnitureView>
@@ -17,7 +17,7 @@
               <StatisticView v-else-if="funcButtonState === 6"></StatisticView>
               <BookmarkView v-else-if="funcButtonState === 7"></BookmarkView>
               <AccountView v-else-if="accountButtonState === true"></AccountView>
-            </v-scroll-x-transition>
+            </v-scroll-y-transition>
           </v-col>
         </v-row>
       </v-container>

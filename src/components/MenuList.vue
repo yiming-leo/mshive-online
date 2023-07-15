@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded="lg" min-height="20vh">
+  <v-sheet rounded="lg" min-height="20vh" min-width="11vw">
     <v-list shaped class="rounded-lg">
       <!--<v-subheader>Functions</v-subheader>-->
       <v-list-item-group v-model="selectedItem" color="primary">
@@ -9,7 +9,7 @@
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="item.content"></v-list-item-title>
+            <v-list-item-title v-text="item.content" class="font-weight-bold"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider class="my-2"></v-divider>

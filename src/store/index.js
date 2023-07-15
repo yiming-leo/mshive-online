@@ -39,6 +39,7 @@ const store = new Vuex.Store({
             state.navbar.accountButton = true
         },
         switchNavbarButton(state, n) {
+            state.funcMenuList.funcButton = null
             state.navbar.accountButton = false
             state.navbar.navbarButtons = n
         },
