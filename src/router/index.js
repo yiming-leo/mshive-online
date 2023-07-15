@@ -55,13 +55,19 @@ const routes = [
     {
         path: '/statistics',
         name: 'statistics',
-        component: () => import('../views/StatisticsView.vue')
+        component: () => import('../views/StatisticView.vue')
     },
     //书签
     {
         path: '/bookmarks',
         name: 'bookmarks',
-        component: () => import('../views/BookmarksView.vue')
+        component: () => import('../views/BookmarkView.vue')
+    },
+    //拓展功能
+    {
+        path: '/extend',
+        name: 'extend',
+        component: () => import('../views/extend/ExtendView.vue')
     },
 ]
 

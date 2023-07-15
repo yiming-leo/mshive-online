@@ -1,12 +1,12 @@
 <template>
-  <div class="account">
-    <h1>This is an about page</h1>
+  <div class="ImportView">
+    <h1>This is an ImportView page</h1>
   </div>
 </template>
 <script>
 
 export default {
-  name: 'Account',
+  name: 'ImportView',
   components: {
   },
 }

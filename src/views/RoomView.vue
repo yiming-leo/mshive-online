@@ -1,12 +1,12 @@
 <template>
-  <div class="account">
-    <h1>This is an about page</h1>
+  <div class="room">
+    <h1>This is an RoomView page</h1>
   </div>
 </template>
 <script>
 
 export default {
-  name: 'Account',
+  name: 'RoomView',
   components: {
   },
 }

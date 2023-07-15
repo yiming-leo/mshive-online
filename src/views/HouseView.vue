@@ -1,13 +1,23 @@
 <template>
-  <div class="account">
-    <h1>This is an about page</h1>
-  </div>
+  <v-container class="my-0 mx-0 px-0 py-0">
+    <v-row>
+      <v-col cols="6">
+        <v-sheet min-height="70vh" rounded="lg">
+          <!--  -->
+        </v-sheet>
+      </v-col>
+      <v-col cols="6">
+        <v-sheet min-height="70vh" rounded="lg">
+          <!--  -->
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 
 export default {
-  name: 'Account',
-  components: {
-  },
+  name: 'HouseView',
+  components: {},
 }
 </script>
