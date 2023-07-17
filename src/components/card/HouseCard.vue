@@ -22,11 +22,11 @@
             </v-chip-group>
           </v-col>
           <v-col align-self="center" cols="1">
-            <v-img height="30" width="30" :style="`backgroundColor: `+ house.color" class="rounded-pill"></v-img>
+            <v-img height="30" width="30" :style="`backgroundColor: `+ house.color" class="rounded-pill"/>
           </v-col>
         </v-row>
       </v-expansion-panel-header>
-      <v-expansion-panel-content>
+      <v-expansion-panel-content :eager="isEager">
         <v-card elevation="0">
           <!--加载动画插槽-->
           <template slot="progress">
@@ -49,9 +49,9 @@
               <v-text-field v-model="house.description" label="Description" :disabled="setDisabled" dense>
                 {{ house.description }}
               </v-text-field>
-              <v-text-field v-model="house.isCurrent" label="Is Current" :disabled="setDisabled" dense>
+              <v-checkbox v-model="house.isCurrent" :label="`Is Current: `+ house.isCurrent" :disabled="setDisabled" dense>
                 {{ house.isCurrent }}
-              </v-text-field>
+              </v-checkbox>
               <v-text-field v-model="house.space" label="Space" :disabled="setDisabled" dense>
                 {{ house.space }}
               </v-text-field>
@@ -86,55 +86,13 @@
 <script>
 export default {
   name: "HouseCard",
+  props:{
+    setDisabled: Boolean,
+    houseList: Array,
+    isEager: false,
+  },
   data: () => ({
-    setDisabled: true,
-    houseList: [
-      {
-        index: '648fe2130df02d3007092a56',
-        attribute: '工作室',
-        color: '#42b883',
-        description: '之江银泰旁边的老窝罢了',
-        imgUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
-        isCurrent: true,
-        isDeleted: false,
-        location: '之江银泰，自己找',
-        modifyTime: '2023-06-19T05:05:23.714Z',
-        name: '我的老窝',
-        refUserId: '648fdfbb54b0950d00c37c2e',
-        space: 120,
-        totalLayer: 3,
-      },
-      {
-        index: '648fe2130df02d3007092a57',
-        attribute: '寝室',
-        color: '#FFC107',
-        description: '糟糕的地方',
-        imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
-        isCurrent: false,
-        isDeleted: false,
-        location: '明德路',
-        modifyTime: '2023-06-19T05:05:23.714Z',
-        name: '立业园',
-        refUserId: '648fdfbb54b0950d00c37c2e',
-        space: 20,
-        totalLayer: 1,
-      },
-      {
-        index: '648fe2130df02d3007092a58',
-        attribute: '老家',
-        color: '#2196F3',
-        description: '梦开始的地方',
-        imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
-        isCurrent: false,
-        isDeleted: false,
-        location: '丽水，浙江',
-        modifyTime: '2023-06-19T05:05:23.714Z',
-        name: '老家',
-        refUserId: '648fdfbb54b0950d00c37c2e',
-        space: 130,
-        totalLayer: 1,
-      },
-    ]
+
   }),
   methods: {
     modifyHouse() {
