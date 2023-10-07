@@ -1,8 +1,8 @@
 <template>
-  <v-sheet rounded="lg" min-height="20vh" min-width="11vw">
-    <v-list shaped class="rounded-lg">
+  <v-sheet rounded min-height="20vh" min-width="11vw">
+    <v-list nav class="rounded-lg">
       <!--<v-subheader>Functions</v-subheader>-->
-      <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list-item-group mandatory v-model="selectedItem" color="primary">
         <v-list-item v-for="item in funcButtonList" :key="item.index"
                      link @click="switchFuncButton(item.index)">
           <v-list-item-icon>
@@ -12,17 +12,6 @@
             <v-list-item-title v-text="item.content" class="font-weight-bold"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-divider class="my-2"></v-divider>
-        <v-list-item-group>
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon v-text="refreshButton.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="refreshButton.content"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
       </v-list-item-group>
     </v-list>
   </v-sheet>
@@ -36,7 +25,7 @@ export default {
   name: "MenuList",
   store,
   data: () => ({
-    selectedItem: null,
+    selectedItem: 0,
     funcButtonList: [
       {index: 1, content: 'House', icon: 'mdi-home'},
       // {index: 2, content: 'Layer', icon: 'mdi-view-dashboard'},

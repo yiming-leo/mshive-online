@@ -11,7 +11,7 @@ const store = new Vuex.Store({
             loginForm: true,
         },
         funcMenuList: {
-            funcButton: null,
+            funcButton: 1,
         },
         navbar: {
             accountButton: false,

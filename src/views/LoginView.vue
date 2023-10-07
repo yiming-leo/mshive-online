@@ -1,12 +1,10 @@
 <template>
   <v-app>
     <v-main class="backgroundImg">
-      <v-scroll-y-transition>
-        <LoginForm v-if="loginFormVisible"></LoginForm>
-      </v-scroll-y-transition>
-      <v-scroll-y-transition>
-        <RegisterForm v-if="registerFormVisible"></RegisterForm>
-      </v-scroll-y-transition>
+        <v-expand-transition>
+          <LoginForm v-if="loginFormVisible"></LoginForm>
+          <RegisterForm v-if="registerFormVisible"></RegisterForm>
+        </v-expand-transition>
     </v-main>
   </v-app>
 </template>
@@ -40,8 +38,11 @@ export default {
 }
 </script>
 <style>
-.backgroundImg{
-  background-image: url("https://cdn.vuetifyjs.com/images/parallax/material.jpg");
+.backgroundImg {
+  background-image: url("../assets/img/hennybabeweb1920.png");
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 </style>

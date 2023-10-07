@@ -1,3 +1,4 @@
+//system bar top of view
 <template>
   <v-system-bar app dark color="active" height="30" window class="px-0">
     <v-spacer></v-spacer>

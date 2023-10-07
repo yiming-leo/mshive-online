@@ -8,16 +8,18 @@
         <v-content class="py-0 text-capitalize">{{ account.username }}</v-content>
       </v-btn>
       <v-divider vertical></v-divider>
-      <v-btn-toggle borderless group dense tile color="primary" v-model="selectedItem">
+      <v-btn-toggle mandatory borderless group dense tile color="primary" v-model="selectedItem">
         <!--nav buttons-->
         <v-btn v-for="link in navbarLinks" :key="link.index" text :href="link.link" retain-focus-on-click
-               @click="switchNavbarButton(link.index)" class="ml-3 font-weight-bold rounded-l rounded-r">
+               @click="switchNavbarButton(link.index); defaultHome(link.index)"
+               class="ml-3 font-weight-bold rounded-l rounded-r">
           {{ link.text }}
         </v-btn>
       </v-btn-toggle>
       <v-spacer></v-spacer>
       <v-responsive min-width="100" max-width="260">
-        <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
+        <v-text-field dense flat hide-details rounded solo-inverted
+                      placeholder="Search Something..."></v-text-field>
       </v-responsive>
       <!--nav right-->
       <v-menu bottom open-on-hover offset-y>
@@ -74,6 +76,12 @@ export default {
       'switchAccountButton',
       'switchNavbarButton',
     ]),
+    //ensure when click any navbar button, the default sub contents(Dashboard-->Home) will react
+    defaultHome(index) {
+      if (index === 1) {
+        this.$store.state.funcMenuList.funcButton = 1
+      }
+    },
   }
 }
 </script>

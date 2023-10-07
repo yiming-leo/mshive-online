@@ -1,3 +1,4 @@
+//login page --> login form
 <template>
   <v-container app fluid class="d-flex justify-center fill-height">
     <v-row justify="center" align="center" class="fill-height">
@@ -120,7 +121,7 @@ export default {
       setTimeout(() => {
         this.formHasErrors = false
         router.push('/')
-      }, 1000)
+      }, 500)
     },
   },
 }

@@ -66,7 +66,9 @@ export default {
       return this.$store.state.navbar.navbarButtons
     }
   },
-  data: () => ({}),
+  data: () => ({
+
+  }),
   methods: {
     ...mapMutations([
       'switchFuncButton',
