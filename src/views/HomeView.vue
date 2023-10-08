@@ -1,3 +1,4 @@
+<!--main root page-->
 <template>
   <v-app id="inspire">
     <NavigationBar></NavigationBar>

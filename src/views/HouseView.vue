@@ -1,10 +1,13 @@
+<!--HomeView->HouseView-->
 <template>
   <v-container class="my-0 mx-0 px-0 py-0">
     <v-row>
       <v-col cols="9">
         <v-sheet class="d-flex flex-column" min-height="70vh" rounded="lg" color="transparent">
           <HouseCard :house-list="houseList" :set-disabled="setHouseCardDisabled"></HouseCard>
-          <HouseCard :is-eager="isHouseCardEager" class="mt-1" :house-list="houseTemplateJSON" :set-disabled="setHouseCardDisabled" v-if="haveAlreadyAddNewOneHouseCard === false"></HouseCard>
+          <HouseCard :is-eager="isHouseCardEager" class="mt-1" :house-list="houseTemplateJSON"
+                     :set-disabled="setHouseCardDisabled" v-if="haveAlreadyAddNewOneHouseCard === false"></HouseCard>
+          <!--the button adding new one house card-->
           <v-btn class="my-2" color="white" @click="addNewOneHouseCard" v-if="haveAlreadyAddNewOneHouseCard === true">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
@@ -12,7 +15,7 @@
       </v-col>
       <v-col cols="3">
         <v-sheet min-height="70vh" rounded="lg">
-          <!--  -->
+          <!--          <v-color-picker dot-size="15" mode="hexa" swatches-max-height="200"></v-color-picker>-->
         </v-sheet>
       </v-col>
     </v-row>
@@ -33,7 +36,8 @@ export default {
       {
         index: '648fe2130df02d3007092a56',
         attribute: '工作室',
-        color: '#42b883',
+        mainColor: '#42b883',
+        minusColor: '#ffaaaa',
         description: '之江银泰旁边的老窝罢了',
         imgUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
         isCurrent: true,
@@ -48,7 +52,8 @@ export default {
       {
         index: '648fe2130df02d3007092a57',
         attribute: '寝室',
-        color: '#FFC107',
+        mainColor: '#FFC107',
+        minusColor: '#ffaaaa',
         description: '糟糕的地方',
         imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
         isCurrent: false,
@@ -63,7 +68,8 @@ export default {
       {
         index: '648fe2130df02d3007092a58',
         attribute: '老家',
-        color: '#2196F3',
+        mainColor: '#2196F3',
+        minusColor: '#ffaaaa',
         description: '梦开始的地方',
         imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
         isCurrent: false,
@@ -79,7 +85,8 @@ export default {
     houseTemplateJSON: [{
       index: '',
       attribute: '',
-      color: '',
+      mainColor: '',
+      minusColor: '',
       description: '',
       imgUrl: '',
       isCurrent: false,
