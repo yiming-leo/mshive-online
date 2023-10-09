@@ -14,8 +14,17 @@
         </v-sheet>
       </v-col>
       <v-col cols="3">
-        <v-sheet min-height="70vh" rounded="lg">
-          <!--          <v-color-picker dot-size="15" mode="hexa" swatches-max-height="200"></v-color-picker>-->
+        <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto">
+          <v-col>
+            <v-treeview v-model="selection" :items="items" return-object
+                        open-all dense hoverable rounded selected-color="blue">
+              <template #prepend="{ item, open }">
+                <v-chip small
+                        :style="`background: linear-gradient(0.45turn,`+item.mainColor+`,`+item.minorColor+`)`">
+                </v-chip>
+              </template>
+            </v-treeview>
+          </v-col>
         </v-sheet>
       </v-col>
     </v-row>
@@ -37,7 +46,7 @@ export default {
         index: '648fe2130df02d3007092a56',
         attribute: '工作室',
         mainColor: '#42b883',
-        minusColor: '#ffaaaa',
+        minorColor: '#ffaaaa',
         description: '之江银泰旁边的老窝罢了',
         imgUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
         isCurrent: true,
@@ -53,7 +62,7 @@ export default {
         index: '648fe2130df02d3007092a57',
         attribute: '寝室',
         mainColor: '#FFC107',
-        minusColor: '#ffaaaa',
+        minorColor: '#ffaaaa',
         description: '糟糕的地方',
         imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
         isCurrent: false,
@@ -69,7 +78,7 @@ export default {
         index: '648fe2130df02d3007092a58',
         attribute: '老家',
         mainColor: '#2196F3',
-        minusColor: '#ffaaaa',
+        minorColor: '#ffaaaa',
         description: '梦开始的地方',
         imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
         isCurrent: false,
@@ -86,7 +95,7 @@ export default {
       index: '',
       attribute: '',
       mainColor: '',
-      minusColor: '',
+      minorColor: '',
       description: '',
       imgUrl: '',
       isCurrent: false,
@@ -98,6 +107,36 @@ export default {
       space: 0,
       totalLayer: 0,
     }],
+    // right tree view
+    selectionType: 'leaf',
+    selection: [],
+    //items only ID! not index!
+    items: [
+      {
+        name: 'Root',
+        id: '648fdfbb54b0950d00c37c2e',
+        children: [
+          {
+            name: '我的老窝',
+            id: '648fe2130df02d3007092a56',
+            mainColor: '#42b883',
+            minorColor: '#ffaaaa',
+          },
+          {
+            name: '立业园',
+            id: '648fe2130df02d3007092a57',
+            mainColor: '#FFC107',
+            minorColor: '#ffaaaa',
+          },
+          {
+            name: '老家',
+            id: '648fe2130df02d3007092a58',
+            mainColor: '#2196F3',
+            minorColor: '#ffaaaa',
+          },
+        ],
+      },
+    ],
   }),
   methods: {
     addNewOneHouseCard() {
