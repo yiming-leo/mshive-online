@@ -8,8 +8,8 @@
           <!--navbar influences left list-->
           <v-col cols="2">
             <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
-            <ImportView style="position: fixed" v-if="navbarButtonState===2"></ImportView>
-            <StatisticView style="position: fixed" v-if="navbarButtonState===3"></StatisticView>
+            <ImportView style="position: fixed" v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
+            <StatisticView style="position: fixed" v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
           </v-col>
           <!--left list influences middle-->
           <v-col cols="10">

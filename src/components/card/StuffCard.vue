@@ -15,11 +15,11 @@
               <v-chip link color="primary" outlined>{{ stuff.attribute }}</v-chip>
               <v-chip link color="amber" outlined>Space: {{ stuff.space }}</v-chip>
               <v-chip link color="pink" outlined>Layer: {{ stuff.layer }}</v-chip>
-              <v-chip v-if="stuff.isCurrent === true" color="vue_theme" outlined>
+              <v-chip v-if="stuff.isBookmarks === true" color="vue_theme" outlined>
                 <v-icon>mdi-check</v-icon>
                 Current
               </v-chip>
-              <v-chip v-else-if="stuff.isCurrent === false" color="error" outlined>
+              <v-chip v-else-if="stuff.isBookmarks === false" color="error" outlined>
                 <v-icon>mdi-minus</v-icon>
                 Outdated
               </v-chip>
@@ -50,6 +50,9 @@
               <v-text-field v-model="stuff.attribute" label="Attribute" :disabled="setDisabled" outlined dense>
                 {{ stuff.attribute }}
               </v-text-field>
+              <v-text-field v-model="stuff.theme" label="Theme" :disabled="setDisabled" outlined dense>
+                {{ stuff.theme }}
+              </v-text-field>
               <v-row class="mt-0">
                 <v-col>
                   <!--颜色插槽1-->
@@ -79,21 +82,19 @@
                 </v-col>
               </v-row>
               <v-row class="mt-0">
-                <v-col>
-                  <v-text-field v-model="stuff.space" label="Space" :disabled="setDisabled"
-                                type="number" outlined dense>
-                    {{ stuff.space }}
+                <v-col cols="8">
+                  <v-text-field v-model="stuff.size" label="Size"
+                                :disabled="setDisabled" outlined dense>
+                    {{ stuff.size }}
                   </v-text-field>
                 </v-col>
-                <v-col>
-                  <v-text-field v-model="stuff.layer" label="Layer"
-                                :disabled="setDisabled" type="number" outlined dense>
-                    {{ stuff.layer }}
-                  </v-text-field>
+                <v-col cols="4">
+                  <v-btn depressed @click="stuff.isBookmarks=!stuff.isBookmarks"
+                         dark :color="stuff.isBookmarks? 'green' : 'red'" :disabled="setDisabled">
+                    <v-icon>{{ (stuff.isBookmarks ? 'mdi-book-check' : 'mdi-book-cancel') }}</v-icon>
+                  </v-btn>
                 </v-col>
               </v-row>
-              <v-switch v-model="stuff.isCurrent" :label="`Is Current: ${stuff.isCurrent}`"
-                        :disabled="setDisabled" dense class="my-0"></v-switch>
             </v-col>
             <v-col cols="7">
               <AvatarUploader></AvatarUploader>
