@@ -41,9 +41,9 @@ const routes = [
     },
     //物品
     {
-        path: '/item',
-        name: 'item',
-        component: () => import('../views/ItemView.vue')
+        path: '/stuff',
+        name: 'stuff',
+        component: () => import('../views/StuffView.vue')
     },
     //导入
     {
@@ -62,12 +62,6 @@ const routes = [
         path: '/bookmarks',
         name: 'bookmarks',
         component: () => import('../views/BookmarkView.vue')
-    },
-    //拓展功能
-    {
-        path: '/extend',
-        name: 'extend',
-        component: () => import('../views/extend/ExtendView.vue')
     },
 ]
 

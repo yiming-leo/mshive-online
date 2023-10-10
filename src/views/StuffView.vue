@@ -1,14 +1,14 @@
-<!--HomeView->RoomView-->
+<!--HomeView->StuffView-->
 <template>
   <v-container class="my-0 mx-0 px-0 py-0">
     <v-row>
       <v-col cols="9">
         <v-sheet class="d-flex flex-column" min-height="70vh" rounded="lg" color="transparent">
-          <RoomCard :room-list="roomList" :set-disabled="setRoomCardDisabled"></RoomCard>
-          <RoomCard :is-eager="isRoomCardEager" class="mt-1" :room-list="roomTemplateJSON"
-                    :set-disabled="setRoomCardDisabled" v-if="haveAlreadyAddNewOneRoomCard === false"></RoomCard>
-          <!--the button adding new one room card-->
-          <v-btn class="my-2" color="white" @click="addNewOneRoomCard" v-if="haveAlreadyAddNewOneRoomCard === true">
+          <StuffCard :stuff-list="stuffList" :set-disabled="setStuffCardDisabled"></StuffCard>
+          <StuffCard :is-eager="isStuffCardEager" class="mt-1" :stuff-list="stuffTemplateJSON"
+                         :set-disabled="setStuffCardDisabled" v-if="haveAlreadyAddNewOneStuffCard === false"></StuffCard>
+          <!--the button adding new one stuff card-->
+          <v-btn class="my-2" color="white" @click="addNewOneStuffCard" v-if="haveAlreadyAddNewOneStuffCard === true">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-sheet>
@@ -34,19 +34,19 @@
 </template>
 <script>
 
-import RoomCard from "@/components/card/RoomCard.vue";
+import StuffCard from "@/components/card/StuffCard.vue";
 
 export default {
-  name: 'RoomView',
+  name: 'Stuff',
   components: {
-    RoomCard
+    StuffCard
   },
   data: () => ({
     // middle
-    setRoomCardDisabled: true,
-    haveAlreadyAddNewOneRoomCard: true,
-    isRoomCardEager: true,
-    roomList: [
+    setStuffCardDisabled: true,
+    haveAlreadyAddNewOneStuffCard: true,
+    isStuffCardEager: true,
+    stuffList: [
       {
         index: '648fe2130df02d3007092a59',
         attribute: '卧室',
@@ -80,7 +80,7 @@ export default {
         layer: 1,
       },
     ],
-    roomTemplateJSON: [{
+    stuffTemplateJSON: [{
       index: '',
       attribute: '',
       mainColor: '',
@@ -130,8 +130,8 @@ export default {
     ],
   }),
   methods: {
-    addNewOneRoomCard() {
-      this.haveAlreadyAddNewOneRoomCard = false
+    addNewOneStuffCard() {
+      this.haveAlreadyAddNewOneStuffCard = false
       //填写信息
       //填完保存
       //保存完刷新组件（此时新数据已加载进入数据库）

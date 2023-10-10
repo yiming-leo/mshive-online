@@ -26,15 +26,14 @@ export default {
   store,
   data: () => ({
     selectedItem: 0,
+    //in global state management -> influence HomeView
     funcButtonList: [
       {index: 1, content: 'House', icon: 'mdi-home'},
       // {index: 2, content: 'Layer', icon: 'mdi-view-dashboard'},
       {index: 2, content: 'Room', icon: 'mdi-floor-plan'},
       {index: 3, content: 'Furniture', icon: 'mdi-sofa'},
-      {index: 4, content: 'Item', icon: 'mdi-text-box-multiple'},
-      {index: 5, content: 'Import', icon: 'mdi-credit-card-scan'},
-      {index: 6, content: 'Statistic', icon: 'mdi-chart-areaspline'},
-      {index: 7, content: 'Bookmark', icon: 'mdi-book'},
+      {index: 4, content: 'Stuff', icon: 'mdi-text-box-multiple'},
+      {index: 5, content: 'Bookmark', icon: 'mdi-book'},
     ],
     refreshButton: {content: 'Refresh', icon: 'mdi-refresh'},
   }),

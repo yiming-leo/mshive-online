@@ -10,6 +10,7 @@ const store = new Vuex.Store({
             registerForm: false,
             loginForm: true,
         },
+        // switch menu list
         funcMenuList: {
             funcButton: 1,
         },
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
             state.components.registerForm = false
             state.components.loginForm = true
         },
+        // switch menu list
         switchFuncButton(state, n) {
             state.funcMenuList.funcButton = n
         },

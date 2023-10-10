@@ -5,18 +5,20 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
+          <!--navbar influences left list-->
           <v-col cols="2">
             <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
+            <ImportView style="position: fixed" v-if="navbarButtonState===2"></ImportView>
+            <StatisticView style="position: fixed" v-if="navbarButtonState===3"></StatisticView>
           </v-col>
+          <!--left list influences middle-->
           <v-col cols="10">
             <v-scroll-y-transition mode="out-in">
               <HouseView v-if="funcButtonState === 1"></HouseView>
               <RoomView v-else-if="funcButtonState === 2"></RoomView>
               <FurnitureView v-else-if="funcButtonState === 3"></FurnitureView>
-              <ItemView v-else-if="funcButtonState === 4"></ItemView>
-              <ImportView v-else-if="funcButtonState === 5"></ImportView>
-              <StatisticView v-else-if="funcButtonState === 6"></StatisticView>
-              <BookmarkView v-else-if="funcButtonState === 7"></BookmarkView>
+              <StuffView v-else-if="funcButtonState === 4"></StuffView>
+              <BookmarkView v-else-if="funcButtonState === 5"></BookmarkView>
               <AccountView v-else-if="accountButtonState === true"></AccountView>
             </v-scroll-y-transition>
           </v-col>
@@ -34,7 +36,7 @@ import SystemBar from "@/components/SystemBar.vue";
 import HouseView from "@/views/HouseView.vue";
 import RoomView from "@/views/RoomView.vue";
 import FurnitureView from "@/views/FurnitureView.vue";
-import ItemView from "@/views/ItemView.vue";
+import StuffView from "@/views/StuffView.vue";
 import ImportView from "@/views/ImportView.vue";
 import StatisticView from "@/views/StatisticView.vue";
 import BookmarkView from "@/views/BookmarkView.vue";
@@ -50,7 +52,7 @@ export default {
     HouseView,
     RoomView,
     FurnitureView,
-    ItemView,
+    StuffView,
     ImportView,
     StatisticView,
     BookmarkView,
@@ -67,9 +69,7 @@ export default {
       return this.$store.state.navbar.navbarButtons
     }
   },
-  data: () => ({
-
-  }),
+  data: () => ({}),
   methods: {
     ...mapMutations([
       'switchFuncButton',

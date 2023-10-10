@@ -54,8 +54,8 @@ export default {
     account: {avatar: "primary", username: "Yiming Leo"},
     navbarLinks: [
       {index: 1, text: 'Dashboard', link: ""},
-      {index: 2, text: 'Message', link: ""},
-      {index: 3, text: 'Extend', link: ""},
+      {index: 2, text: 'Import', link: ""},
+      {index: 3, text: 'Statistic', link: ""},
       {index: 4, text: 'Export', link: ""},
       {index: 5, text: 'Official Web', link: "http://49.235.113.96:8081"},
     ],
