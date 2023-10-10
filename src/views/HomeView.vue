@@ -5,26 +5,31 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <v-col class="my-0 mx-0 px-0 py-0" cols="12">
-            <ManageView v-if="accountButtonState===false && navbarButtonState===4"></ManageView>
-          </v-col>
+          <!--          <v-col class="my-0 mx-0 px-0 py-0" cols="12">-->
+          <!--            <v-scroll-y-reverse-transition mode="out-in">-->
+
+          <!--            </v-scroll-y-reverse-transition>-->
+          <!--          </v-col>-->
           <!--navbar influences left list-->
           <v-col cols="2">
-            <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
-            <ImportView style="position: fixed" v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
-            <StatisticView style="position: fixed"
-                           v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
-          </v-col>
-          <!--left list influences middle-->
-          <v-col cols="10">
             <v-scroll-y-transition mode="out-in">
-              <HouseView v-if="funcButtonState === 1"></HouseView>
-              <FurnitureView v-else-if="funcButtonState === 2"></FurnitureView>
-              <StuffView v-else-if="funcButtonState === 3"></StuffView>
-              <BookmarkView v-else-if="funcButtonState === 4"></BookmarkView>
-              <AccountView v-else-if="accountButtonState === true"></AccountView>
+              <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
+              <ImportView style="position: fixed"
+                          v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
+              <StatisticView style="position: fixed"
+                             v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
             </v-scroll-y-transition>
           </v-col>
+          <!--left list influences middle-->
+          <v-scroll-y-transition mode="out-in">
+            <HouseView v-if="funcButtonState === 1"></HouseView>
+            <FurnitureView v-else-if="funcButtonState === 2"></FurnitureView>
+            <StuffView v-else-if="funcButtonState === 3"></StuffView>
+            <BookmarkView v-else-if="funcButtonState === 4"></BookmarkView>
+
+            <AccountView v-else-if="accountButtonState === true"></AccountView>
+            <ManageView v-if="accountButtonState===false && navbarButtonState===4"></ManageView>
+          </v-scroll-y-transition>
         </v-row>
       </v-container>
     </v-main>
@@ -70,9 +75,18 @@ export default {
     },
     navbarButtonState() {
       return this.$store.state.navbar.navbarButtons
-    }
+    },
   },
-  data: () => ({}),
+  data: () => ({
+    colLength: 2,
+  }),
+  // mounted() {
+  //   if (this.navbarButtonState === 4) {
+  //     this.colLength = 12
+  //   } else {
+  //     this.colLength = 2
+  //   }
+  // },
   methods: {
     ...mapMutations([
       'switchFuncButton',

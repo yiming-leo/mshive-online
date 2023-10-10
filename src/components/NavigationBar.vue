@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="white" flat>
+  <v-app-bar app color="white" flat elevation="1">
     <v-container class="py-0 fill-height">
       <!--user button-->
       <v-btn text class="px-2 mr-3 d-flex flex-row justify-start overflow-hidden"

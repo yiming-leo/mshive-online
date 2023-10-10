@@ -1,37 +1,39 @@
 <!--HomeView->StuffView-->
 <template>
-  <v-container class="my-0 mx-0 px-0 py-0">
-    <v-row>
-      <v-col cols="9">
-        <v-sheet class="d-flex flex-column overflow-auto" min-height="70vh"
-                 rounded="lg" color="transparent">
-          <StuffCard :stuff-list="stuffList" :set-disabled="setStuffCardDisabled"></StuffCard>
-          <StuffCard :is-eager="isStuffCardEager" class="mt-1" :stuff-list="stuffTemplateJSON"
-                         :set-disabled="setStuffCardDisabled" v-if="haveAlreadyAddNewOneStuffCard === false"></StuffCard>
-          <!--the button adding new one stuff card-->
-          <v-btn class="my-2" color="white" @click="addNewOneStuffCard" v-if="haveAlreadyAddNewOneStuffCard === true">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-        </v-sheet>
-      </v-col>
-      <!--right tree view-->
-      <v-col cols="3">
-        <!--right top view bar-->
-        <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto">
-          <v-col>
-            <v-treeview v-model="selection" :items="items" return-object
-                        open-all dense hoverable rounded selected-color="blue">
-              <template #prepend="{ item, open }">
-                <v-chip small
-                        :style="`background: linear-gradient(0.45turn,`+item.mainColor+`,`+item.minorColor+`)`">
-                </v-chip>
-              </template>
-            </v-treeview>
-          </v-col>
-        </v-sheet>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-col :cols="10">
+    <v-container class="my-0 mx-0 px-0 py-0">
+      <v-row>
+        <v-col cols="9">
+          <v-sheet class="d-flex flex-column overflow-auto" min-height="70vh"
+                   rounded="lg" color="transparent">
+            <StuffCard :stuff-list="stuffList" :set-disabled="setStuffCardDisabled"></StuffCard>
+            <StuffCard :is-eager="isStuffCardEager" class="mt-1" :stuff-list="stuffTemplateJSON"
+                       :set-disabled="setStuffCardDisabled" v-if="haveAlreadyAddNewOneStuffCard === false"></StuffCard>
+            <!--the button adding new one stuff card-->
+            <v-btn class="my-2" color="white" @click="addNewOneStuffCard" v-if="haveAlreadyAddNewOneStuffCard === true">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-sheet>
+        </v-col>
+        <!--right tree view-->
+        <v-col cols="3">
+          <!--right top view bar-->
+          <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto">
+            <v-col>
+              <v-treeview v-model="selection" :items="items" return-object
+                          open-all dense hoverable rounded selected-color="blue">
+                <template #prepend="{ item, open }">
+                  <v-chip small
+                          :style="`background: linear-gradient(0.45turn,`+item.mainColor+`,`+item.minorColor+`)`">
+                  </v-chip>
+                </template>
+              </v-treeview>
+            </v-col>
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-col>
 </template>
 <script>
 
@@ -119,7 +121,7 @@ export default {
         isDeleted: false,
         modifyCount: 0,
         modifyTime: new Date(),
-      },{
+      }, {
         index: '648fe2130df02d3007092a64',
         refUserId: '648fdfbb54b0950d00c37c2e',
         refHomeId: '648fe2130df02d3007092a58',
@@ -154,7 +156,7 @@ export default {
         isDeleted: false,
         modifyCount: 0,
         modifyTime: new Date(),
-      },{
+      }, {
         index: '648fe2130df02d3007092a64',
         refUserId: '648fdfbb54b0950d00c37c2e',
         refHomeId: '648fe2130df02d3007092a58',
