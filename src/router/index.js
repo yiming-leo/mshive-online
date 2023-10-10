@@ -27,12 +27,6 @@ const routes = [
         name: 'house',
         component: () => import('../views/HouseView.vue')
     },
-    //房间
-    {
-        path: '/room',
-        name: 'room',
-        component: () => import('../views/RoomView.vue')
-    },
     //家具
     {
         path: '/furniture',

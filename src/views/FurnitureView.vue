@@ -6,9 +6,11 @@
         <v-sheet class="d-flex flex-column" min-height="70vh" rounded="lg" color="transparent">
           <FurnitureCard :furniture-list="furnitureList" :set-disabled="setFurnitureCardDisabled"></FurnitureCard>
           <FurnitureCard :is-eager="isFurnitureCardEager" class="mt-1" :furniture-list="furnitureTemplateJSON"
-                    :set-disabled="setFurnitureCardDisabled" v-if="haveAlreadyAddNewOneFurnitureCard === false"></FurnitureCard>
+                         :set-disabled="setFurnitureCardDisabled"
+                         v-if="haveAlreadyAddNewOneFurnitureCard === false"></FurnitureCard>
           <!--the button adding new one furniture card-->
-          <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard" v-if="haveAlreadyAddNewOneFurnitureCard === true">
+          <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard"
+                 v-if="haveAlreadyAddNewOneFurnitureCard === true">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-sheet>
@@ -51,7 +53,6 @@ export default {
         index: '648fe4410df02d3007092a61',
         refUserId: '648fdfbb54b0950d00c37c2e',
         refHomeId: '648fe2130df02d3007092a58',
-        refRoomId: '648fe4410df02d3007092a60',
         name: '大书柜',
         description: '放书的地方',
         attribute: '书柜',
@@ -69,7 +70,6 @@ export default {
         index: '648fe4410df02d3007092a62',
         refUserId: '648fdfbb54b0950d00c37c2e',
         refHomeId: '648fe2130df02d3007092a58',
-        refRoomId: '648fe4410df02d3007092a60',
         name: '通用书桌',
         description: '读书的地方',
         attribute: '书桌',
@@ -88,7 +88,6 @@ export default {
       index: '',
       refUserId: '',
       refHomeId: '',
-      refRoomId: '',
       name: '',
       description: '',
       attribute: '',
@@ -118,32 +117,18 @@ export default {
             minorColor: '#ffaaaa',
             children: [
               {
-                name: '卧室',
-                id: '648fe2130df02d3007092a59',
-                mainColor: '#42b883',
-                minorColor: '#ffaaaa',
+                name: '大书柜',
+                id: '648fe4410df02d3007092a61',
+                mainColor: '#ffaaaa',
+                minorColor: '#aaffff',
               },
               {
-                name: '客厅',
-                id: '648fe2130df02d3007092a60',
-                mainColor: '#422222',
-                minorColor: '#ffa111',
-                children: [
-                  {
-                    name: '大书柜',
-                    id: '648fe4410df02d3007092a61',
-                    mainColor: '#ffaaaa',
-                    minorColor: '#aaffff',
-                  },
-                  {
-                    name: '通用书桌',
-                    id: '648fe4410df02d3007092a62',
-                    mainColor: '#ffaaaa',
-                    minorColor: '#aaffff',
-                  },
-                ]
+                name: '通用书桌',
+                id: '648fe4410df02d3007092a62',
+                mainColor: '#ffaaaa',
+                minorColor: '#aaffff',
               },
-            ],
+            ]
           },
         ],
       },

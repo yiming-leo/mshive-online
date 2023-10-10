@@ -14,14 +14,14 @@
             <v-chip-group>
               <v-chip link color="primary" outlined>{{ furniture.attribute }}</v-chip>
               <v-chip link color="amber" outlined>Space: {{ furniture.space }}</v-chip>
-              <v-chip link color="pink" outlined>Layer: {{ furniture.layer }}</v-chip>
-              <v-chip v-if="furniture.isCurrent === true" color="vue_theme" outlined>
+              <v-chip link color="pink" outlined>Size: {{ furniture.size }}</v-chip>
+              <v-chip v-if="furniture.isBookmarks === true" color="vue_theme" outlined>
                 <v-icon>mdi-check</v-icon>
-                Current
+                Bookmarked
               </v-chip>
-              <v-chip v-else-if="furniture.isCurrent === false" color="error" outlined>
+              <v-chip v-else-if="furniture.isBookmarks === false" color="error" outlined>
                 <v-icon>mdi-minus</v-icon>
-                Outdated
+                UnBookmark
               </v-chip>
             </v-chip-group>
           </v-col>

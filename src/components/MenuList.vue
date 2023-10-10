@@ -30,10 +30,9 @@ export default {
     funcButtonList: [
       {index: 1, content: 'House', icon: 'mdi-home'},
       // {index: 2, content: 'Layer', icon: 'mdi-view-dashboard'},
-      {index: 2, content: 'Room', icon: 'mdi-floor-plan'},
-      {index: 3, content: 'Furniture', icon: 'mdi-sofa'},
-      {index: 4, content: 'Stuff', icon: 'mdi-text-box-multiple'},
-      {index: 5, content: 'Bookmark', icon: 'mdi-book'},
+      {index: 2, content: 'Furniture', icon: 'mdi-sofa'},
+      {index: 3, content: 'Stuff', icon: 'mdi-text-box-multiple'},
+      {index: 4, content: 'Bookmark', icon: 'mdi-book'},
     ],
     refreshButton: {content: 'Refresh', icon: 'mdi-refresh'},
   }),

@@ -57,7 +57,7 @@ export default {
       {index: 2, text: 'Import', link: ""},
       {index: 3, text: 'Statistic', link: ""},
       {index: 4, text: 'Export', link: ""},
-      {index: 5, text: 'Official Web', link: "http://49.235.113.96:8081"},
+      {index: 5, text: 'Official Web', link: "http://8.134.147.174:8081/"},
     ],
     languageList: [
       {index: 1, lang: "zh_cn", name: "简体中文", flag: "cn"},

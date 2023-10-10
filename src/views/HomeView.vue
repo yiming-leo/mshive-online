@@ -15,10 +15,9 @@
           <v-col cols="10">
             <v-scroll-y-transition mode="out-in">
               <HouseView v-if="funcButtonState === 1"></HouseView>
-              <RoomView v-else-if="funcButtonState === 2"></RoomView>
-              <FurnitureView v-else-if="funcButtonState === 3"></FurnitureView>
-              <StuffView v-else-if="funcButtonState === 4"></StuffView>
-              <BookmarkView v-else-if="funcButtonState === 5"></BookmarkView>
+              <FurnitureView v-else-if="funcButtonState === 2"></FurnitureView>
+              <StuffView v-else-if="funcButtonState === 3"></StuffView>
+              <BookmarkView v-else-if="funcButtonState === 4"></BookmarkView>
               <AccountView v-else-if="accountButtonState === true"></AccountView>
             </v-scroll-y-transition>
           </v-col>
@@ -34,7 +33,6 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import MenuList from "@/components/MenuList.vue";
 import SystemBar from "@/components/SystemBar.vue";
 import HouseView from "@/views/HouseView.vue";
-import RoomView from "@/views/RoomView.vue";
 import FurnitureView from "@/views/FurnitureView.vue";
 import StuffView from "@/views/StuffView.vue";
 import ImportView from "@/views/ImportView.vue";
@@ -50,7 +48,6 @@ export default {
     MenuList,
     SystemBar,
     HouseView,
-    RoomView,
     FurnitureView,
     StuffView,
     ImportView,
