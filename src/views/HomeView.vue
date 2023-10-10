@@ -5,11 +5,15 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
+          <v-col class="my-0 mx-0 px-0 py-0" cols="12">
+            <ManageView v-if="accountButtonState===false && navbarButtonState===4"></ManageView>
+          </v-col>
           <!--navbar influences left list-->
           <v-col cols="2">
             <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
             <ImportView style="position: fixed" v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
-            <StatisticView style="position: fixed" v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
+            <StatisticView style="position: fixed"
+                           v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
           </v-col>
           <!--left list influences middle-->
           <v-col cols="10">
@@ -39,11 +43,13 @@ import ImportView from "@/views/ImportView.vue";
 import StatisticView from "@/views/StatisticView.vue";
 import BookmarkView from "@/views/BookmarkView.vue";
 import AccountView from "@/views/AccountView.vue";
+import ManageView from "@/views/ManageView.vue";
 
 export default {
   name: 'Home',
   store,
   components: {
+    ManageView,
     NavigationBar,
     MenuList,
     SystemBar,

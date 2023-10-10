@@ -57,6 +57,12 @@ const routes = [
         name: 'bookmarks',
         component: () => import('../views/BookmarkView.vue')
     },
+    //管理
+    {
+        path: '/manage',
+        name: 'manage',
+        component: () => import('../views/ManageView.vue')
+    },
 ]
 
 const router = new VueRouter({
