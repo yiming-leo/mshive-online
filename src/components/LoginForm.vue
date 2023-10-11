@@ -3,7 +3,13 @@
   <v-container app fluid class="d-flex justify-center fill-height">
     <v-row justify="center" align="center" class="fill-height">
       <!--      <v-col cols="12">-->
-      <v-card ref="form" width="600">
+      <v-card ref="form" width="600" :disabled="loading">
+        <v-overlay absolute :value="loading">
+          <v-progress-circular
+              indeterminate
+              color="primary"
+          ></v-progress-circular>
+        </v-overlay>
         <v-card-title>Login</v-card-title>
         <v-card-subtitle>Login Your Personal Account</v-card-subtitle>
         <v-card-text>
@@ -46,6 +52,15 @@
           </v-slide-x-reverse-transition>
           <v-btn color="primary" class="font-weight-bold" text @click="submit">Login</v-btn>
         </v-card-actions>
+        <v-snackbar v-model="optSnackbar" light top>
+          <div class="text-body-1">
+            OTP has sent to your email/phone, please check it.
+          </div>
+          <div class="text--caption">Type or copy/paste.</div>
+          <template v-slot:action="{ attrs }">
+            <v-btn color="pink" text v-bind="attrs" @click="optSnackbar = false">Close</v-btn>
+          </template>
+        </v-snackbar>
       </v-card>
       <!--      </v-col>-->
     </v-row>
@@ -63,7 +78,9 @@ export default {
     OPTInput,
   },
   data: () => ({
+    optSnackbar: false,
     showPwd: false,
+    loading: false,
     defaultLoginSelection: 'Email',
     loginSelection: ['Email', 'Telephone'],
     errorMessages: '',
@@ -110,18 +127,18 @@ export default {
       })
     },
     sendOPTtoUser() {
+      this.emailCheck()
+      this.telephoneCheck()
+      this.optSnackbar = true
       console.log('sent!')
     },
     submit() {
       this.formHasErrors = false
-      // Object.keys(this.form).forEach(f => {
-      //   if (!this.form[f]) this.formHasErrors = true
-      //   this.$refs[f].validate(true)
-      // })
+      this.loading = true
       setTimeout(() => {
         this.formHasErrors = false
         router.push('/')
-      }, 500)
+      }, 1500)
     },
   },
 }

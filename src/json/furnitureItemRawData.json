@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Root",
+    "id": "648fdfbb54b0950d00c37c2e",
+    "children": [
+      {
+        "name": "老家",
+        "id": "648fe2130df02d3007092a58",
+        "mainColor": "#2196F3",
+        "minorColor": "#ffaaaa",
+        "children": [
+          {
+            "name": "大书柜",
+            "id": "648fe4410df02d3007092a61",
+            "mainColor": "#ffaaaa",
+            "minorColor": "#aaffff"
+          },
+          {
+            "name": "通用书桌",
+            "id": "648fe4410df02d3007092a62",
+            "mainColor": "#ffaaaa",
+            "minorColor": "#aaffff"
+          }
+        ]
+      }
+    ]
+  }
+]

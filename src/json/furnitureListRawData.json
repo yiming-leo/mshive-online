@@ -1,0 +1,36 @@
+[
+  {
+    "index": "648fe4410df02d3007092a61",
+    "refUserId": "648fdfbb54b0950d00c37c2e",
+    "refHomeId": "648fe2130df02d3007092a58",
+    "name": "大书柜",
+    "description": "放书的地方",
+    "attribute": "书柜",
+    "mainColor": "#ffaaaa",
+    "minorColor": "#aaffff",
+    "size": "xxl",
+    "usage": "经常放以前的书",
+    "imgUrl": "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg",
+    "isBookmarks": true,
+    "isDeleted": false,
+    "modifyCount": 1,
+    "modifyTime": "new Date()"
+  },
+  {
+    "index": "648fe4410df02d3007092a62",
+    "refUserId": "648fdfbb54b0950d00c37c2e",
+    "refHomeId": "648fe2130df02d3007092a58",
+    "name": "通用书桌",
+    "description": "读书的地方",
+    "attribute": "书桌",
+    "mainColor": "#ffaaaa",
+    "minorColor": "#aaffff",
+    "size": "xl",
+    "usage": "经常读书",
+    "imgUrl": "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg",
+    "isBookmarks": true,
+    "isDeleted": false,
+    "modifyCount": 1,
+    "modifyTime": "new Date()"
+  }
+]

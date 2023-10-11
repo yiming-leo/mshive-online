@@ -16,8 +16,7 @@
               <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
               <ImportView style="position: fixed"
                           v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
-              <StatisticView style="position: fixed"
-                             v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
+
             </v-scroll-y-transition>
           </v-col>
           <!--left list influences middle-->
@@ -26,8 +25,10 @@
             <FurnitureView v-else-if="funcButtonState === 2"></FurnitureView>
             <StuffView v-else-if="funcButtonState === 3"></StuffView>
             <BookmarkView v-else-if="funcButtonState === 4"></BookmarkView>
+            <TimelineView v-else-if="funcButtonState === 5"></TimelineView>
 
             <AccountView v-else-if="accountButtonState === true"></AccountView>
+            <StatisticView v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
             <ManageView v-if="accountButtonState===false && navbarButtonState===4"></ManageView>
           </v-scroll-y-transition>
         </v-row>
@@ -49,11 +50,13 @@ import StatisticView from "@/views/StatisticView.vue";
 import BookmarkView from "@/views/BookmarkView.vue";
 import AccountView from "@/views/AccountView.vue";
 import ManageView from "@/views/ManageView.vue";
+import TimelineView from "@/views/TimelineView.vue";
 
 export default {
   name: 'Home',
   store,
   components: {
+    TimelineView,
     ManageView,
     NavigationBar,
     MenuList,

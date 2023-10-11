@@ -1,6 +1,6 @@
 <template>
   <v-col :cols="10">
-    <v-sheet rounded class="my-0 mx-0 px-0 py-0">
+    <v-sheet elevation="2" rounded class="my-0 mx-0 px-0 py-0">
       <v-container>
         <v-row justify="center" align="center" class="fill-height">
           <v-col>

@@ -19,7 +19,7 @@
         <!--right tree view-->
         <v-col cols="3">
           <!--right top view bar-->
-          <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto">
+          <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto" elevation="2">
             <v-col>
               <v-treeview v-model="selection" :items="items" return-object
                           open-all dense hoverable rounded selected-color="blue">
@@ -39,6 +39,9 @@
 <script>
 
 import FurnitureCard from "@/components/card/FurnitureCard.vue";
+import furnitureListRawData from "@/json/furnitureListRawData.json"
+import furnitureItemRawData from "@/json/furnitureItemRawData.json"
+import furnitureTemplateJSON from "@/json/furnitureTemplateJSON.json"
 
 export default {
   name: 'FurnitureView',
@@ -50,91 +53,13 @@ export default {
     setFurnitureCardDisabled: true,
     haveAlreadyAddNewOneFurnitureCard: true,
     isFurnitureCardEager: true,
-    furnitureList: [
-      {
-        index: '648fe4410df02d3007092a61',
-        refUserId: '648fdfbb54b0950d00c37c2e',
-        refHomeId: '648fe2130df02d3007092a58',
-        name: '大书柜',
-        description: '放书的地方',
-        attribute: '书柜',
-        mainColor: '#ffaaaa',
-        minorColor: '#aaffff',
-        size: 'xxl',
-        usage: '经常放以前的书',
-        imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
-        isBookmarks: true,
-        isDeleted: false,
-        modifyCount: 1,
-        modifyTime: new Date(),
-      },
-      {
-        index: '648fe4410df02d3007092a62',
-        refUserId: '648fdfbb54b0950d00c37c2e',
-        refHomeId: '648fe2130df02d3007092a58',
-        name: '通用书桌',
-        description: '读书的地方',
-        attribute: '书桌',
-        mainColor: '#ffaaaa',
-        minorColor: '#aaffff',
-        size: 'xl',
-        usage: '经常读书',
-        imgUrl: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg',
-        isBookmarks: true,
-        isDeleted: false,
-        modifyCount: 1,
-        modifyTime: new Date(),
-      },
-    ],
-    furnitureTemplateJSON: [{
-      index: '',
-      refUserId: '',
-      refHomeId: '',
-      name: '',
-      description: '',
-      attribute: '',
-      mainColor: '',
-      minorColor: '',
-      size: 0,
-      usage: '',
-      imgUrl: '',
-      isBookmarks: true,
-      isDeleted: false,
-      modifyCount: 0,
-      modifyTime: '',
-    }],
+    furnitureList: furnitureListRawData,
+    furnitureTemplateJSON: furnitureTemplateJSON,
     // right tree view
     selectionType: 'leaf',
     selection: [],
     //items only ID! not index!
-    items: [
-      {
-        name: 'Root',
-        id: '648fdfbb54b0950d00c37c2e',
-        children: [
-          {
-            name: '老家',
-            id: '648fe2130df02d3007092a58',
-            mainColor: '#2196F3',
-            minorColor: '#ffaaaa',
-            children: [
-              {
-                name: '大书柜',
-                id: '648fe4410df02d3007092a61',
-                mainColor: '#ffaaaa',
-                minorColor: '#aaffff',
-              },
-              {
-                name: '通用书桌',
-                id: '648fe4410df02d3007092a62',
-                mainColor: '#ffaaaa',
-                minorColor: '#aaffff',
-              },
-            ]
-          },
-        ],
-      },
-    ],
+    items: furnitureItemRawData,
   }),
   methods: {
     addNewOneFurnitureCard() {

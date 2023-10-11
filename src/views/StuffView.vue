@@ -18,7 +18,7 @@
         <!--right tree view-->
         <v-col cols="3">
           <!--right top view bar-->
-          <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto">
+          <v-sheet min-height="60vh" max-height="70vh" rounded="lg" class="overflow-auto" elevation="2">
             <v-col>
               <v-treeview v-model="selection" :items="items" return-object
                           open-all dense hoverable rounded selected-color="blue">

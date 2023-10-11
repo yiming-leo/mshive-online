@@ -34,7 +34,8 @@
         </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content :eager="isEager">
-        <v-card elevation="0">
+        <v-hover v-slot="{hover}">
+        <v-card :elevation="hover? 12:0" class="px-4 transition-swing">
           <!--加载动画插槽-->
           <template slot="progress">
             <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
@@ -121,6 +122,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        </v-hover>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
