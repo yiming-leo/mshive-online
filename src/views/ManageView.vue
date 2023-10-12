@@ -1,8 +1,15 @@
 <template>
   <v-container>
-    <v-text-field
-        v-model="search" dense outlined append-icon="mdi-magnify"
-        label="Search Table..." single-line hide-details></v-text-field>
+    <v-row dense class="mb-1">
+      <v-col cols="2">
+        <v-btn @click="printPage" color="primary">Print Page</v-btn>
+      </v-col>
+      <v-col cols="10">
+        <v-text-field
+            v-model="search" dense outlined append-icon="mdi-magnify"
+            label="Search Table..." single-line hide-details></v-text-field>
+      </v-col>
+    </v-row>
     <v-data-table :headers="headers" :items="allStuff" :search="search"
                   item-key="index" :group-by="['house']"
                   class="elevation-1 overflow-hidden" show-group-by
@@ -61,6 +68,11 @@ export default {
   created() {
     this.initialize()
   },
+  methods: {
+    printPage() {
+      window.print()
+    }
+  }
 }
 </script>
 
