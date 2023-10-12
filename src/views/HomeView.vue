@@ -13,7 +13,7 @@
           <!--navbar influences left list-->
           <v-col cols="2">
             <v-scroll-y-transition mode="out-in">
-              <MenuList style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
+              <MenuList id="menulist" style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
               <ImportView style="position: fixed"
                           v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
 

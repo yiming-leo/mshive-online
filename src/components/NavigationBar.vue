@@ -1,6 +1,6 @@
 <template>
   <v-hover v-slot="{hover}">
-    <v-app-bar app color="white" flat :elevation="hover? 12:1">
+    <v-app-bar app color="white" flat :elevation="hover? 12:1" id="navbar">
       <v-container class="py-0 fill-height">
         <!--user button-->
         <v-btn text class="px-2 mr-3 d-flex flex-row justify-start overflow-hidden"
@@ -95,5 +95,13 @@ export default {
 </script>
 
 <style scoped>
-
+@media print {
+  @page {
+    /*size: A4;*/
+    margin: 0;
+  }
+  #navbar{
+    display: none;
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 //system bar top of view
 <template>
-  <v-system-bar app dark color="active" height="30" window class="px-0">
+  <v-system-bar app dark color="active" height="30" window class="px-0" id="systembar">
     <v-spacer></v-spacer>
     <a href="#" class="white--text">New Service Available Now! 🎉</a>
     <v-spacer></v-spacer>
@@ -25,5 +25,13 @@ export default {
 </script>
 
 <style scoped>
-
+@media print {
+  @page {
+    /*size: A4;*/
+    margin: 0;
+  }
+  #systembar{
+    display: none;
+  }
+}
 </style>
