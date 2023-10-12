@@ -3,7 +3,7 @@ module.exports = defineConfig({
     transpileDependencies: [
         'vuetify'
     ],
-    //新增
+    //Production Mode
     publicPath: process.env.NODE_ENV === 'production'
         ? '/mshive-online/'
         : '/'

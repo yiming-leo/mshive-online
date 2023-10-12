@@ -3,34 +3,18 @@
     <v-text-field
         v-model="search" dense outlined append-icon="mdi-magnify"
         label="Search Table..." single-line hide-details></v-text-field>
-    <v-data-table :headers="headers" :items="desserts" :search="search"
+    <v-data-table :headers="headers" :items="allStuff" :search="search"
                   item-key="index" :group-by="['house']"
-                  class="elevation-1" show-group-by
+                  class="elevation-1 overflow-hidden" show-group-by
                   multi-sort :loading="loading" loading-text="Loading... Please wait"
     >
-<!--      <template #top>-->
-<!--        <v-card>-->
-<!--          <v-card-actions>-->
-<!--            <v-spacer></v-spacer>-->
-<!--            <v-btn color="blue darken-1" text @click="close">Cancel-->
-<!--            </v-btn>-->
-<!--            <v-btn color="blue darken-1" text @click="save">Save-->
-<!--            </v-btn>-->
-<!--          </v-card-actions>-->
-<!--        </v-card>-->
-<!--      </template>-->
-<!--      <template v-slot:item.actions="{ item }">-->
-<!--        <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>-->
-<!--        <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>-->
-<!--      </template>-->
-<!--      <template v-slot:no-data>-->
-<!--        <v-btn color="primary" @click="initialize">Reset</v-btn>-->
-<!--      </template>-->
     </v-data-table>
   </v-container>
 </template>
 
 <script>
+import manageAllStuff from "@/json/manage/manageAllStuff.json"
+
 export default {
   name: "ManageView",
   data() {
@@ -60,64 +44,12 @@ export default {
         {text: 'Color2', value: 'minorColor', align: 'center', groupable: true},
         {text: 'Theme', value: 'theme', align: 'center', groupable: true},
         {text: 'Bookmark', value: 'isBookmarks', align: 'center', groupable: true},
+        {text: 'Description', value: 'description', align: 'center', groupable: true},
       ],
-      desserts: [
-        {
-          index: '1',
-          name: '劳力士',
-          house: '老家',
-          furniture: '橱柜',
-          attribute: '手表',
-          size: 's',
-          isBookmarks: true,
-          theme: '主题1',
-          mainColor: '#ffaaaa',
-          minorColor: '#aaffff',
-        },
-        {
-          index: '2',
-          name: '充电宝',
-          house: '老家',
-          furniture: '书桌',
-          attribute: '电器',
-          size: 'm',
-          isBookmarks: false,
-          theme: '主题2',
-          mainColor: '#ffaaaa',
-          minorColor: '#aaffff',
-        },
-        {
-          index: '3',
-          name: '劳力士2',
-          house: '立业园',
-          furniture: '橱柜',
-          attribute: '手表',
-          size: 's',
-          isBookmarks: true,
-          theme: '主题1',
-          mainColor: '#ffaaaa',
-          minorColor: '#aaffff',
-        },
-        {
-          index: '4',
-          name: '旧手机',
-          house: '立业园',
-          furniture: '书桌',
-          attribute: '电器',
-          size: 'm',
-          isBookmarks: true,
-          theme: '主题2',
-          mainColor: '#ffaaaa',
-          minorColor: '#aaffff',
-        },
-      ],
+      allStuff: manageAllStuff,
     }
   },
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    },
-  },
+  computed: {},
   watch: {
     dialog(val) {
       val || this.close()

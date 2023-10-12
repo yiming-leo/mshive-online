@@ -46,6 +46,9 @@
                 <v-text-field v-model="furniture.index" label="UUID" disabled>
                   {{ furniture.index }}
                 </v-text-field>
+                <v-text-field v-model="furniture.refHomeId" label="Belong to Home UUID" :disabled="setDisabled">
+                  {{ furniture.refHomeId }}
+                </v-text-field>
                 <v-text-field v-model="furniture.name" label="Name" :disabled="setDisabled" outlined dense>
                   {{ furniture.name }}
                 </v-text-field>
