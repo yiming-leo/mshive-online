@@ -4,6 +4,7 @@ module.exports = defineConfig({
     'vuetify'
   ],
   //新增
-  publicPath: 'https://github.com/Hooorus/mshive-online',//github仓库名
-  assetsDir: 'https://github.com/Hooorus/mshive-online',//同上，否则访问不到静态资源
+  publicPath: 'mshive-online',//github仓库名
+  assetsDir: 'mshive-online',//同上，否则访问不到静态资源
+  outputDir:"dist",
 })
