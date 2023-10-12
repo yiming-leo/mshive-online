@@ -12,7 +12,7 @@
         <v-btn-toggle mandatory borderless group dense tile color="primary" v-model="selectedItem">
           <!--nav buttons-->
           <v-btn v-for="link in navbarLinks" :key="link.index" text :href="link.link" retain-focus-on-click
-                 @click="switchNavbarButton(link.index); defaultHome(link.index)"
+                 @click="switchNavbarButton(link.index); defaultHome(link.index); detectOfficialWeb(link.index)"
                  class="ml-3 font-weight-bold rounded-l rounded-r">
             {{ link.text }}
           </v-btn>
@@ -59,7 +59,7 @@ export default {
       {index: 2, text: 'Im/Export', link: ""},
       {index: 3, text: 'Statistic', link: ""},
       {index: 4, text: 'Manage', link: ""},
-      {index: 5, text: 'Official Web', link: "http://8.134.147.174:8081/"},
+      {index: 5, text: 'Official Web', link: "/"},
     ],
     languageList: [
       {index: 1, lang: "zh_cn", name: "简体中文", flag: "cn"},
@@ -84,6 +84,12 @@ export default {
         this.$store.state.funcMenuList.funcButton = 1
       }
     },
+    //
+    detectOfficialWeb(index){
+      if (index === 5) {
+        window.open("http://8.134.147.174:8081/")
+      }
+    }
   }
 }
 </script>
