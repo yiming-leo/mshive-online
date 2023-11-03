@@ -30,7 +30,7 @@ export default {
     selectedItem: 0,
     //in global state management -> influence HomeView
     funcButtonList: [
-      {index: 1, content: 'House', icon: 'mdi-home'},
+        {index: 1, content: 'Room', icon: 'mdi-home'},
       // {index: 2, content: 'Layer', icon: 'mdi-view-dashboard'},
       {index: 2, content: 'Furniture', icon: 'mdi-sofa'},
       {index: 3, content: 'Stuff', icon: 'mdi-text-box-multiple'},

@@ -7,10 +7,8 @@
   "attribute": "",
   "mainColor": "",
   "minorColor": "",
-  "size": 0,
-  "usage": "",
   "imgUrl": "",
-  "isBookmarks": true,
+  "isBookmarks": false,
   "isDeleted": false,
   "modifyCount": 0,
   "modifyTime": ""

@@ -3,7 +3,7 @@
     <v-sheet min-height="60vh" max-height="80vh" rounded="lg" class="overflow-auto" elevation="2">
       <v-col>
         <v-text-field v-model="search" label="Search Directory / Stuff" outlined background-color="white"
-                      hide-details clearable clear-icon="mdi-close-circle-outline">
+                      hide-details clearable clear-icon="mdi-close-circle-outline"  @click="bookmarkTreeRequest(userUUId)">
         </v-text-field>
         <v-checkbox v-model="caseSensitive" hide-details label="Case sensitive search">
         </v-checkbox>
@@ -51,7 +51,8 @@
   </v-col>
 </template>
 <script>
-import bookmarkRawData from "@/json/bookmarkRawData.json"
+
+import {getBookmarkTree} from "@/api/bookmarkTreeRequest/bookmarkApi";
 
 export default {
   name: 'BookmarkView',
@@ -62,7 +63,8 @@ export default {
     search: null,
     treeSearchResult: null,
     caseSensitive: false,
-    items: [bookmarkRawData]
+    items: [],
+    userUUId: '648fdfbb54b0950d00c37c2e'
   }),
   computed: {
     filter() {
@@ -70,7 +72,15 @@ export default {
           ? (item, search, textKey) => item[textKey].indexOf(search) > -1
           : undefined
     },
+
   },
-  methods: {}
+  methods: {
+    bookmarkTreeRequest(userUUId) {
+      getBookmarkTree(userUUId).then(res => {
+        console.log(res)
+        this.items = res.data.data
+      })
+    }
+  }
 }
 </script>

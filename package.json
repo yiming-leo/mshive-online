@@ -9,6 +9,7 @@
   "dependencies": {
     "@amcharts/amcharts5": "^5.4.11",
     "@mdi/font": "5.9.55",
+    "axios": "^1.6.0",
     "core-js": "^3.8.3",
     "flag-icons": "^6.7.0",
     "roboto-fontface": "*",

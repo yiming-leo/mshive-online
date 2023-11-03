@@ -13,15 +13,13 @@
           <v-col align-self="center" cols="8">
             <v-chip-group>
               <v-chip link color="primary" outlined>{{ stuff.attribute }}</v-chip>
-              <v-chip link color="amber" outlined>Space: {{ stuff.space }}</v-chip>
-              <v-chip link color="pink" outlined>Layer: {{ stuff.layer }}</v-chip>
               <v-chip v-if="stuff.isBookmarks === true" color="vue_theme" outlined>
                 <v-icon>mdi-check</v-icon>
-                Current
+                Bookmarked
               </v-chip>
               <v-chip v-else-if="stuff.isBookmarks === false" color="error" outlined>
                 <v-icon>mdi-minus</v-icon>
-                Outdated
+                unBookmark
               </v-chip>
             </v-chip-group>
           </v-col>
@@ -45,73 +43,67 @@
                 <v-text-field v-model="stuff.index" label="UUID" disabled>
                   {{ stuff.index }}
                 </v-text-field>
-                <v-text-field v-model="stuff.refHomeId" label="Belong to Home UUID" :disabled="setDisabled">
-                  {{ stuff.refHomeId }}
+                <v-text-field v-model="stuff.refRoomId" label="Belong to Room UUID" disabled>
+                  {{ stuff.refRoomId }}
                 </v-text-field>
-                <v-text-field v-model="stuff.refFurnitureId" label="Belong to Furniture UUID" :disabled="setDisabled">
+                <v-text-field v-model="stuff.refFurnitureId" label="Belong to Furniture UUID" disabled>
                   {{ stuff.refFurnitureId }}
                 </v-text-field>
                 <v-text-field v-model="stuff.name" label="Name" :disabled="setDisabled" outlined dense>
                   {{ stuff.name }}
                 </v-text-field>
-                <v-text-field v-model="stuff.attribute" label="Attribute" :disabled="setDisabled" outlined dense>
-                  {{ stuff.attribute }}
-                </v-text-field>
-                <v-text-field v-model="stuff.theme" label="Theme" :disabled="setDisabled" outlined dense>
-                  {{ stuff.theme }}
-                </v-text-field>
-                <v-row class="mt-0">
+                <v-row>
+                  <v-col cols="9">
+                    <v-text-field v-model="stuff.attribute" label="Attribute" :disabled="setDisabled" outlined dense>
+                      {{ stuff.attribute }}
+                    </v-text-field>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-btn depressed @click="stuff.isBookmarks=!stuff.isBookmarks"
+                           dark :color="stuff.isBookmarks? 'green' : 'red'" :disabled="setDisabled">
+                      <v-icon>{{ (stuff.isBookmarks ? 'mdi-book-check' : 'mdi-book-cancel') }}</v-icon>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+                <v-row class="mx-0 my-1">
+                  <v-row>
+                    <v-col>
+                      <!--颜色插槽1-->
+                      <v-menu transition="fade-transition">
+                        <template #activator="{on, attrs}">
+                          <v-text-field v-model="stuff.mainColor" label="Main Color" :disabled="setDisabled"
+                                        outlined dense v-bind="attrs" v-on="on">
+                            {{ stuff.mainColor }}
+                          </v-text-field>
+                        </template>
+                        <v-color-picker dot-size="25" swatches-max-height="200"
+                                        v-model:value="stuff.mainColor"></v-color-picker>
+                      </v-menu>
+                    </v-col>
+                    <v-col>
+                      <!--颜色插槽2-->
+                      <v-menu transition="fade-transition">
+                        <template #activator="{on, attrs}">
+                          <v-text-field v-model="stuff.minorColor" label="Minor Color" :disabled="setDisabled"
+                                        outlined dense v-bind="attrs" v-on="on">
+                            {{ stuff.minorColor }}
+                          </v-text-field>
+                        </template>
+                        <v-color-picker dot-size="25" swatches-max-height="200"
+                                        v-model:value="stuff.minorColor"></v-color-picker>
+                      </v-menu>
+                    </v-col>
+                  </v-row>
+                  <v-textarea v-model="stuff.description" label="Description" :disabled="setDisabled" outlined
+                              height="80"
+                              clearable clear-icon="mdi-close-circle" counter>
+                    {{ stuff.description }}
+                  </v-textarea>
                 </v-row>
               </v-col>
               <v-col cols="7">
-                <AvatarUploader></AvatarUploader>
+                <AvatarUploader frame-height="430"></AvatarUploader>
               </v-col>
-            </v-row>
-            <v-row>
-              <!--颜色插槽1-->
-              <v-col cols="4">
-                <v-menu transition="fade-transition">
-                  <template #activator="{on, attrs}">
-                    <v-text-field v-model="stuff.mainColor" label="Main Color" :disabled="setDisabled"
-                                  outlined dense v-bind="attrs" v-on="on">
-                      {{ stuff.mainColor }}
-                    </v-text-field>
-                  </template>
-                  <v-color-picker dot-size="25" swatches-max-height="200"
-                                  v-model:value="stuff.mainColor"></v-color-picker>
-                </v-menu>
-              </v-col>
-              <!--颜色插槽2-->
-              <v-col cols="4">
-                <v-menu transition="fade-transition">
-                  <template #activator="{on, attrs}">
-                    <v-text-field v-model="stuff.minorColor" label="Minor Color" :disabled="setDisabled"
-                                  outlined dense v-bind="attrs" v-on="on">
-                      {{ stuff.minorColor }}
-                    </v-text-field>
-                  </template>
-                  <v-color-picker dot-size="25" swatches-max-height="200"
-                                  v-model:value="stuff.minorColor"></v-color-picker>
-                </v-menu>
-              </v-col>
-              <v-col cols="2">
-                <v-text-field v-model="stuff.size" label="Size"
-                              :disabled="setDisabled" outlined dense>
-                  {{ stuff.size }}
-                </v-text-field>
-              </v-col>
-              <v-col cols="2">
-                <v-btn depressed @click="stuff.isBookmarks=!stuff.isBookmarks"
-                       dark :color="stuff.isBookmarks? 'green' : 'red'" :disabled="setDisabled">
-                  <v-icon>{{ (stuff.isBookmarks ? 'mdi-book-check' : 'mdi-book-cancel') }}</v-icon>
-                </v-btn>
-              </v-col>
-            </v-row>
-            <v-row class="ms-0 me-3">
-              <v-textarea v-model="stuff.description" label="Description" :disabled="setDisabled" outlined height="80"
-                          clearable clear-icon="mdi-close-circle" counter>
-                {{ stuff.description }}
-              </v-textarea>
             </v-row>
             <v-card-actions class="px-0 mt-auto d-flex justify-end">
               <v-btn color="primary" class="font-weight-bold" text @click="modifyStuff()"

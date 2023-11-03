@@ -4,13 +4,16 @@
                   @change="uploadFile" :disabled="loading.uploadIsLoading" prepend-icon="mdi-camera"
                   :loading="loading.uploadIsLoading" accept="image/*" class="mx-0 px-0 my-0 py-0">
     </v-file-input>
-    <v-img :src="imgUrl" height="330" style="border: 1px solid #757575"></v-img>
+    <v-img :src="imgUrl" :height="frameHeight" style="border: 1px solid #757575"></v-img>
   </v-container>
 </template>
 <script>
 
 export default {
   name: "AvatarUploader",
+  props:{
+    frameHeight: 330
+  },
   data() {
     return {
       fileInfo: null,

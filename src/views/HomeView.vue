@@ -1,6 +1,9 @@
 <!--main root page-->
 <template>
   <v-app id="inspire">
+    <v-slide-y-transition>
+      <SystemBar v-if="systemBarVisible"></SystemBar>
+    </v-slide-y-transition>
     <NavigationBar></NavigationBar>
     <v-main class="grey lighten-3">
       <v-container>
@@ -21,7 +24,7 @@
           </v-col>
           <!--left list influences middle-->
           <v-scroll-y-transition mode="out-in">
-            <HouseView v-if="funcButtonState === 1"></HouseView>
+            <RoomView v-if="funcButtonState === 1"></RoomView>
             <FurnitureView v-else-if="funcButtonState === 2"></FurnitureView>
             <StuffView v-else-if="funcButtonState === 3"></StuffView>
             <BookmarkView v-else-if="funcButtonState === 4"></BookmarkView>
@@ -42,7 +45,6 @@ import {mapMutations} from "vuex";
 import NavigationBar from "@/components/NavigationBar.vue";
 import MenuList from "@/components/MenuList.vue";
 import SystemBar from "@/components/SystemBar.vue";
-import HouseView from "@/views/HouseView.vue";
 import FurnitureView from "@/views/FurnitureView.vue";
 import StuffView from "@/views/StuffView.vue";
 import ImportView from "@/views/ImportView.vue";
@@ -51,17 +53,18 @@ import BookmarkView from "@/views/BookmarkView.vue";
 import AccountView from "@/views/AccountView.vue";
 import ManageView from "@/views/ManageView.vue";
 import TimelineView from "@/views/TimelineView.vue";
+import RoomView from "@/views/RoomView.vue";
 
 export default {
   name: 'Home',
   store,
   components: {
+    RoomView,
     TimelineView,
     ManageView,
     NavigationBar,
     MenuList,
     SystemBar,
-    HouseView,
     FurnitureView,
     StuffView,
     ImportView,
@@ -79,6 +82,9 @@ export default {
     navbarButtonState() {
       return this.$store.state.navbar.navbarButtons
     },
+    systemBarVisible() {
+      return this.$store.state.components.systemBar
+    },
   },
   data: () => ({
     colLength: 2,
@@ -95,6 +101,7 @@ export default {
       'switchFuncButton',
       'switchAccountButton',
       'switchNavbarButton',
+      'setSystemBarVisible',
     ]),
   },
 }
