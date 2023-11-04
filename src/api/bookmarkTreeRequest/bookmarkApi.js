@@ -1,4 +1,4 @@
-import server from "@/api/request";
+import server from "@/api/basicRequest";
 
 /**
  * getBookmarkTree请求得到相应用户的物品树

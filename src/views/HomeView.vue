@@ -17,9 +17,6 @@
           <v-col cols="2">
             <v-scroll-y-transition mode="out-in">
               <MenuList id="menulist" style="position: fixed" v-if="accountButtonState===false && navbarButtonState===1"></MenuList>
-              <ImportView style="position: fixed"
-                          v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
-
             </v-scroll-y-transition>
           </v-col>
           <!--left list influences middle-->
@@ -31,6 +28,7 @@
             <TimelineView v-else-if="funcButtonState === 5"></TimelineView>
 
             <AccountView v-else-if="accountButtonState === true"></AccountView>
+            <ImportView v-if="accountButtonState===false && navbarButtonState===2"></ImportView>
             <StatisticView v-if="accountButtonState===false && navbarButtonState===3"></StatisticView>
             <ManageView v-if="accountButtonState===false && navbarButtonState===4"></ManageView>
           </v-scroll-y-transition>

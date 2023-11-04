@@ -1,4 +1,4 @@
-import server from "@/api/request";
+import server from "@/api/basicRequest";
 
 export function insertOneFurniture(userUUId, putData) {
     return server.put(`/furniture/${userUUId}/insert_one`, {
@@ -35,22 +35,6 @@ export function deleteOneFurniture(userUUId, furnitureUUId) {
         },
         params: {
             furnitureUUId
-        }
-    })
-}
-
-export function downloadFurnitureReport(userUUId, startDate, endDate, onlyBookmarks, needAll) {
-    return server.post(`/furniture/${userUUId}/download_report_form`, {
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-        },
-        params: {
-            startDate,
-            endDate,
-            onlyBookmarks,
-            needAll
         }
     })
 }

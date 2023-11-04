@@ -1,3 +1,3 @@
-import server from "@/api/request";
+import server from "@/api/basicRequest";
 
 
