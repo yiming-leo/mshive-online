@@ -6,9 +6,10 @@
           <template>
             <v-card :elevation="hover? 12:2" class="mx-auto my-2 transition-swing">
               <v-img
+
                   :src="exportImgURL.roomReport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000010, #F8BBD020, #00000050"
                   height="200"
                   max-width="400"
               >
@@ -37,7 +38,7 @@
               <v-img
                   :src="exportImgURL.furnitureReport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #536DFE20, #00000050"
                   height="200"
                   max-width="400"
               >
@@ -68,7 +69,7 @@
               <v-img
                   :src="exportImgURL.stuffReport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #EA80FC20, #00000050"
                   height="200"
                   max-width="400"
               >
@@ -99,7 +100,7 @@
               <v-img
                   :src="exportImgURL.roomTemplate"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #FF910020, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -126,7 +127,7 @@
               <v-img
                   :src="exportImgURL.roomImport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #E1F5FE20, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -155,7 +156,7 @@
               <v-img
                   :src="exportImgURL.furnitureTemplate"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #00000050, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -182,7 +183,7 @@
               <v-img
                   :src="exportImgURL.furnitureImport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #1DE9B620, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -211,7 +212,7 @@
               <v-img
                   :src="exportImgURL.stuffTemplate"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #B388FF20, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -238,7 +239,7 @@
               <v-img
                   :src="exportImgURL.stuffImport"
                   class="white--text"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  gradient="to bottom, #00000020, #FF572220, #00000050"
                   max-height="200"
                   max-width="600"
               >
@@ -263,7 +264,7 @@
 </template>
 <script>
 import {exportImgURL} from "@/assets/js/exportImgCDN";
-import {downloadReport} from "@/api/downloadReportRequest/downloadReportAPI";
+import {downloadReport} from "@/api/downloadReportRequest/downloadReportApi";
 
 
 export default {
@@ -292,7 +293,7 @@ export default {
     //下载报表：房间，家具，物品
     triggerDownloadReport(userUUId, startDate, endDate, onlyBookmarks,
                           needAll, downloadType, fileName, fileType) {
-      //组装数据
+      //组装form/data数据
       let data = new FormData()
       data.append('start_date', startDate)
       data.append('end_date', endDate)

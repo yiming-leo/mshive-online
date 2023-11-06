@@ -43,10 +43,10 @@
                 <v-text-field v-model="stuff.index" label="UUID" disabled>
                   {{ stuff.index }}
                 </v-text-field>
-                <v-text-field v-model="stuff.refRoomId" label="Belong to Room UUID" disabled>
+                <v-text-field v-model="stuff.refRoomId" label="Belong to Room UUID" :disabled="setDisabled">
                   {{ stuff.refRoomId }}
                 </v-text-field>
-                <v-text-field v-model="stuff.refFurnitureId" label="Belong to Furniture UUID" disabled>
+                <v-text-field v-model="stuff.refFurnitureId" label="Belong to Furniture UUID" :disabled="setDisabled">
                   {{ stuff.refFurnitureId }}
                 </v-text-field>
                 <v-text-field v-model="stuff.name" label="Name" :disabled="setDisabled" outlined dense>

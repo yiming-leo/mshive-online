@@ -44,9 +44,30 @@
                 <v-text-field v-model="furniture.index" label="UUID" disabled>
                   {{ furniture.index }}
                 </v-text-field>
-                <v-text-field v-model="furniture.refRoomId" label="Belong to Room UUID" disabled>
-                  {{ furniture.refRoomId }}
-                </v-text-field>
+                <!--自动搜索Room词库-->
+                <v-menu transition="fade-transition" :close-on-content-click="false">
+                  <template #activator="{onRoom, attrsRoom}">
+                    <v-autocomplete label="Belong to Room" prefix="Room Name: " :disabled="setDisabled"
+                                    v-on="onRoom" v-bind="attrsRoom" no-data-text="请选择所属Room"
+                                    v-model="furniture.refRoomId" :items="roomTagList" item-text="roomName"
+                                    item-value="roomUUID">
+                      <!--此插槽是对下拉菜单中的各项进行修改，会覆盖原先数据-->
+                      <template #item="{item}">
+                        <v-row>
+                          <v-col cols="4" sm>
+                            <v-list-item-title>{{ item.roomName }}</v-list-item-title>
+                          </v-col>
+                          <v-col cols="7" sm>
+                            <v-list-item-subtitle>{{ item.roomUUID }}</v-list-item-subtitle>
+                          </v-col>
+                          <v-col cols="1" sm align-self="center" class="rounded-lg rounded-tr-0 rounded-bl-0"
+                                 :style="`background: linear-gradient(0.45turn,`+item.mainColor+`,`+item.minorColor+`)`">
+                          </v-col>
+                        </v-row>
+                      </template>
+                    </v-autocomplete>
+                  </template>
+                </v-menu>
                 <v-text-field v-model="furniture.name" label="Name" :disabled="setDisabled" outlined dense>
                   {{ furniture.name }}
                 </v-text-field>
@@ -68,11 +89,15 @@
                   <v-row>
                     <v-col>
                       <!--颜色插槽1-->
-                      <v-menu transition="fade-transition">
+                      <v-menu transition="fade-transition" v-model="showMainColorPicker"
+                              :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="furniture.mainColor" label="Main Color" :disabled="setDisabled"
                                         outlined dense v-bind="attrs" v-on="on">
                             {{ furniture.mainColor }}
+                            <template #append>
+                              <v-icon :color="furniture.mainColor" :disabled="setDisabled">mdi-palette</v-icon>
+                            </template>
                           </v-text-field>
                         </template>
                         <v-color-picker dot-size="25" swatches-max-height="200"
@@ -81,11 +106,15 @@
                     </v-col>
                     <v-col>
                       <!--颜色插槽2-->
-                      <v-menu transition="fade-transition">
+                      <v-menu transition="fade-transition" v-model="showMinorColorPicker"
+                              :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="furniture.minorColor" label="Minor Color" :disabled="setDisabled"
                                         outlined dense v-bind="attrs" v-on="on">
                             {{ furniture.minorColor }}
+                            <template #append>
+                              <v-icon :color="furniture.minorColor" :disabled="setDisabled">mdi-palette</v-icon>
+                            </template>
                           </v-text-field>
                         </template>
                         <v-color-picker dot-size="25" swatches-max-height="200"
@@ -104,9 +133,6 @@
                 <AvatarUploader frame-height="400"></AvatarUploader>
               </v-col>
             </v-row>
-            <!--            <v-row class="ms-0 me-3">-->
-            <!--              -->
-            <!--            </v-row>-->
             <v-card-actions class="px-0 mt-auto d-flex justify-end">
               <v-btn color="primary" class="font-weight-bold" text @click="modifyFurniture()"
                      v-if="setDisabled===true">Modify
@@ -139,8 +165,31 @@ export default {
     furnitureList: Array,
     isEager: false,
   },
-  data: () => ({}),
+  data: () => ({
+    roomTagList: [
+      {roomUUID: '648fe4410df02d3007092a58', roomName: '办公', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a59', roomName: '私人', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a60', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a61', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a62', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a63', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a64', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+      {roomUUID: '648fe4410df02d3007092a65', roomName: '生活', mainColor: "#ffaaaa", minorColor: "#aaffff"},
+    ],
+    showMainColorPicker: false,
+    showMinorColorPicker: false,
+    colorPickerMenu: false,
+  }),
+  computed: {},
   methods: {
+    roomListFilter(item, queryText, itemText) {
+      const textOne = item.roomName.toLowerCase()
+      const textTwo = item.roomUUID
+      const searchText = queryText.toLowerCase()
+
+      return textOne.indexOf(searchText) > -1 ||
+          textTwo.indexOf(searchText) > -1
+    },
     modifyFurniture() {
       this.setDisabled = false
     },
