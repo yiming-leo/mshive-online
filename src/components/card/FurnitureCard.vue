@@ -98,7 +98,7 @@
                   <v-row>
                     <v-col>
                       <!--颜色插槽1-->
-                      <v-menu transition="fade-transition" v-model="showMainColorPicker"
+                      <v-menu transition="fade-transition"
                               :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="furniture.mainColor" label="Main Color" :disabled="setDisabled"
@@ -115,7 +115,7 @@
                     </v-col>
                     <v-col>
                       <!--颜色插槽2-->
-                      <v-menu transition="fade-transition" v-model="showMinorColorPicker"
+                      <v-menu transition="fade-transition"
                               :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="furniture.minorColor" label="Minor Color" :disabled="setDisabled"
@@ -222,8 +222,8 @@ export default {
     roomUUIds: [],
 
     //颜色选择器菜单显示与否
-    showMainColorPicker: false,
-    showMinorColorPicker: false,
+    showMainColorPicker: [],
+    showMinorColorPicker: [],
     //遮罩层显示与否
     overlayLoading: false,
     //消息栏
@@ -233,9 +233,7 @@ export default {
     snackbarData: "none",
     snackbarTimeout: 2000,
   }),
-  computed: {
-
-  },
+  computed: {},
   watch: {},
   mounted() {
     this.queryRoomListByRoomUUIds(this.userUUId)
