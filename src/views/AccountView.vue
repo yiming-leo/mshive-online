@@ -50,7 +50,7 @@ export default {
   name: 'Account',
   components: {AvatarUploader},
   data: () => ({
-    continents: ['Asia', 'Europe', 'Africa', 'North America', 'South America', 'Australia', 'Antarctica'],
+    continents: ['Asia', 'Europe', 'Africa', 'North America', 'South America', 'Oceania', 'Antarctica'],
     continent: null,
     errorMessages: '',
     username: null,
