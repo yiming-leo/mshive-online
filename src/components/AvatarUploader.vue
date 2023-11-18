@@ -120,31 +120,6 @@ export default {
         opacity: 1,
       };
     },
-    //数组数据渲染
-    computedMultipleStyle(){
-      for (let i = 0; i < this.itemRenderList.length; i++) {
-        var w = this.itemRenderMode.boundingBox.width
-        var h = this.itemRenderMode.boundingBox.height
-        var d = this.itemRenderMode.boundingBox.topLeftX
-        var c = this.itemRenderMode.boundingBox.topLeftY
-        var a = 600//CDN图片长
-        var b = 337//CDN图片高
-        var x = 600//浏览器图片长
-        var y = b * x / a//浏览器图片高
-        //计算左端
-        var resleft = ((d / a) * x) - (x / 2) + (w / 2)
-        console.log("resleft: " + resleft)
-        //计算右端
-        var restop = ((c / b) * y) - (y / 2) + (h / 2)
-        console.log("restop: " + restop)
-        //赋值中心点模组
-        this.itemCentralRenderMode.tag = this.itemRenderMode.tag
-        this.itemCentralRenderMode.type = this.itemRenderMode.type
-        this.itemCentralRenderMode.leftX = resleft
-        this.itemCentralRenderMode.leftY = restop
-        //返回位置
-      }
-    }
   },
   methods: {
     clearTag() {

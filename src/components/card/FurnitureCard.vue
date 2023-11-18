@@ -258,29 +258,32 @@ export default {
           }
         }
       } catch (error) {
-        this.sendMessage(500, 'error', "room tag search failed", 2000);
-        console.log("error: " + error)
+        if (furnitureListLength == null) {
+          console.error("RU404", "room tag search failed")
+          this.sendMessage(404, 'warning', "room uuid list loading failed", 2000);
+        }
       }
-      //根据加装的room uuid查询完整的room list
-      await searchRoomListByRoomUUIds(userUUId, this.roomUUIds).then(res => {
-        if (res.data.status != 200 || !res) {
-          this.sendMessage(404, 'warning', res.data.msg, 2000);
-        } else {
-          try {
+
+      try {
+        //根据加装的room uuid查询完整的room list
+        await searchRoomListByRoomUUIds(userUUId, this.roomUUIds).then(res => {
+          if (res.data.status != 200 || !res) {
+            this.sendMessage(404, 'warning', res.data.msg, 2000);
+          } else {
             var roomUUIdLength = this.roomUUIds.length
             //根据之前push进入的room id，来查找并装载tag数据
             for (let i = 0; i < roomUUIdLength; i++) {
               this.roomTagList.push(res.data.data.at(i))
             }
-          } catch (error) {
-            this.sendMessage(500, 'error', "room tag search failed", 2000);
-            console.log("error: " + error)
           }
-        }
-        this.sendMessage(200, 'success', res.data.msg, 2000);
-        //转换状态
-        this.setDisabled = true
-      })
+          this.sendMessage(200, 'success', res.data.msg, 2000);
+          //转换状态
+          this.setDisabled = true
+        })
+      } catch (error) {
+        console.error("RR404", "room tag search failed")
+        this.sendMessage(500, 'error', "room tag search failed", 2000);
+      }
     },
     //-------------修改操作（空操作，为了迎合保存操作）----------------
     modifyFurniture() {

@@ -10,12 +10,12 @@
               <FurnitureCard :furniture-list="furnitureList" ref="furnitureCard"
                              :user-u-u-id="userUUId"
                              :userUUId="userUUId"></FurnitureCard>
+              <!--the button adding new one furniture card-->
               <FurnitureCard :is-eager="isFurnitureCardEager" ref="furnitureCard"
                              :user-u-u-id="userUUId"
                              class="mt-1" :furniture-list="furnitureTemplateJSON"
                              v-if="haveAlreadyAddNewOneFurnitureCard === false">
               </FurnitureCard>
-              <!--the button adding new one furniture card-->
               <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard"
                      v-if="haveAlreadyAddNewOneFurnitureCard === true">
                 <v-icon>mdi-plus</v-icon>
@@ -76,7 +76,7 @@ export default {
     async loadAllFurniture(userUUId) {
       //封闭操作遮罩层
       this.overlayLoading = true
-      //更新数据到数据库
+      //搜索数据
       try {
         await searchAllFurniture(userUUId).then(res => {
           if (res.data.status != 200 || !res) {
@@ -84,14 +84,12 @@ export default {
           } else {
             //将返回data内的list数据传给furnitureList进行渲染
             this.furnitureList = res.data.data
-            console.log("this.furnitureList furniture view")
-            console.log(this.furnitureList)
             this.sendMessage(200, 'success', res.data.message, 2000);
           }
         })
       } catch (error) {
+        console.error("FR404", "furniture load failed")
         this.sendMessage(500, 'error', "load failed", 2000);
-        console.log("error: " + error)
       }
       //开放操作遮罩层
       this.overlayLoading = false
