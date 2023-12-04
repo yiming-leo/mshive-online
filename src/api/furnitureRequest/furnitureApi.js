@@ -114,7 +114,7 @@ export function searchAllFurniture(userUUId) {
         })
 }
 
-//搜索furniture标签，返回List[<furnitureUUId>: <家具名字>]，注意不是attribute!!!
+//搜索furniture标签，返回List[<furnitureUUId>: <家具名字>]，注意不是attribute!!! 家具tag用
 export function searchFurnitureTag(userUUId) {
     return server.get(
         `/furniture/${userUUId}/search_tag`,

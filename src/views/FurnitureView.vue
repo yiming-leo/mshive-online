@@ -16,6 +16,7 @@
                              class="mt-1" :furniture-list="furnitureTemplateJSON"
                              v-if="haveAlreadyAddNewOneFurnitureCard === false">
               </FurnitureCard>
+              <!--the add-new-one button-->
               <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard"
                      v-if="haveAlreadyAddNewOneFurnitureCard === true">
                 <v-icon>mdi-plus</v-icon>
@@ -40,7 +41,6 @@ export default {
   },
   data: () => ({
     userUUId: '648fdfbb54b0950d00c37c2e',
-    setFurnitureCardDisabled: true,
     haveAlreadyAddNewOneFurnitureCard: true,
     isFurnitureCardEager: true,
     isLoading: false,

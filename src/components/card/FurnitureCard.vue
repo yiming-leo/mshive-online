@@ -236,6 +236,7 @@ export default {
   computed: {},
   watch: {},
   mounted() {
+    //查询供furniture选择的room列表
     this.queryRoomListByRoomUUIds(this.userUUId)
   },
   methods: {
@@ -276,7 +277,8 @@ export default {
               this.roomTagList.push(res.data.data.at(i))
             }
           }
-          this.sendMessage(200, 'success', res.data.msg, 2000);
+          // 成功不需要发送消息
+          // this.sendMessage(200, 'success', res.data.msg, 2000);
           //转换状态
           this.setDisabled = true
         })

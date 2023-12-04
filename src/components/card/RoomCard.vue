@@ -41,8 +41,8 @@
             </template>
             <v-row>
               <v-col cols="5" class="mt-2">
-                <v-text-field v-model="room.index" label="UUID" disabled>
-                  {{ room.index }}
+                <v-text-field v-model="room.id" label="UUID" disabled>
+                  {{ room.id }}
                 </v-text-field>
                 <v-text-field v-model="room.name" label="Name" :disabled="setDisabled" outlined dense>
                   {{ room.name }}
@@ -58,17 +58,22 @@
                            dark :color="room.isBookmarks? 'green' : 'red'" :disabled="setDisabled">
                       <v-icon>{{ (room.isBookmarks ? 'mdi-book-check' : 'mdi-book-cancel') }}</v-icon>
                     </v-btn>
-                    </v-col>
+                  </v-col>
                 </v-row>
+                <!-- 左侧下共二行：颜色选择器-描述文本框-->
                 <v-row class="mx-0 my-1">
                   <v-row>
                     <v-col>
                       <!--颜色插槽1-->
-                      <v-menu transition="fade-transition">
+                      <v-menu transition="fade-transition"
+                              :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="room.mainColor" label="Main Color" :disabled="setDisabled"
                                         outlined dense v-bind="attrs" v-on="on">
                             {{ room.mainColor }}
+                            <template #append>
+                              <v-icon :color="room.mainColor" :disabled="setDisabled">mdi-palette</v-icon>
+                            </template>
                           </v-text-field>
                         </template>
                         <v-color-picker dot-size="25" swatches-max-height="200"
@@ -77,11 +82,15 @@
                     </v-col>
                     <v-col>
                       <!--颜色插槽2-->
-                      <v-menu transition="fade-transition">
+                      <v-menu transition="fade-transition"
+                              :close-on-content-click="false">
                         <template #activator="{on, attrs}">
                           <v-text-field v-model="room.minorColor" label="Minor Color" :disabled="setDisabled"
                                         outlined dense v-bind="attrs" v-on="on">
                             {{ room.minorColor }}
+                            <template #append>
+                              <v-icon :color="room.minorColor" :disabled="setDisabled">mdi-palette</v-icon>
+                            </template>
                           </v-text-field>
                         </template>
                         <v-color-picker dot-size="25" swatches-max-height="200"
@@ -89,26 +98,39 @@
                       </v-menu>
                     </v-col>
                   </v-row>
+                  <!--描述文本框-->
                   <v-textarea v-model="room.description" label="Description" :disabled="setDisabled" outlined
                               height="120" clearable clear-icon="mdi-close-circle" counter>
                     {{ room.description }}
                   </v-textarea>
                 </v-row>
               </v-col>
+              <!--右侧：图片上传与识别加载-->
               <v-col cols="7">
+                <!--图片上传器，需要额外插槽-->
                 <AvatarUploader frame-height="330"></AvatarUploader>
               </v-col>
             </v-row>
+            <!--右下三按钮-->
             <v-card-actions class="px-0 mt-auto d-flex justify-end">
+              <!--修改/保存按钮-->
               <v-btn color="primary" class="font-weight-bold" text @click="modifyRoom()"
                      v-if="setDisabled===true">Modify
               </v-btn>
-              <v-btn color="teal" class="font-weight-bold" text @click="saveRoom(room)"
+              <v-btn color="teal" class="font-weight-bold" text @click="saveRoom(userUUId, room)"
                      v-if="setDisabled===false">Save
               </v-btn>
-              <v-btn color="red" class="font-weight-bold" text @click="deleteRoom(room.index)">
+              <v-overlay :value="overlayLoading">
+                <v-progress-circular
+                    indeterminate
+                    size="64"
+                ></v-progress-circular>
+              </v-overlay>
+              <!--删除按钮-->
+              <v-btn color="red" class="font-weight-bold" text @click="deleteRoom(userUUId, room.index)">
                 Delete
               </v-btn>
+              <!--复制按钮-->
               <v-btn color="deep-purple" class="font-weight-bold" text @click="duplicateRoom(room.index)">
                 Duplicate
               </v-btn>
@@ -117,37 +139,126 @@
         </v-hover>
       </v-expansion-panel-content>
     </v-expansion-panel>
+    <!--消息栏-->
+    <v-snackbar v-model="snackbarStatus" light :timeout="snackbarTimeout" width="500"
+                :color="snackbarColor" shaped app top centered>
+      <v-row>
+        <!--状态码-->
+        <v-col cols="5" class="text-h6" align-self="center">
+          {{ snackbarCode }}
+        </v-col>
+        <!--消息内容-->
+        <v-col cols="7" align-self="center">
+          {{ snackbarData }}
+        </v-col>
+      </v-row>
+      <!--关闭按钮-->
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="snackbarStatus = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-expansion-panels>
 </template>
 
 <script>
 import AvatarUploader from "@/components/AvatarUploader.vue";
+import {getCurrentDateTime} from "@/js/generalDataConverter";
+import {deleteOneRoom, updateOneRoom} from "@/api/roomRequest/roomApi";
+
 
 export default {
   name: "RoomCard",
   components: {AvatarUploader},
   props: {
-    setDisabled: Boolean,
+    userUUId: String,
     roomList: Array,
     isEager: false,
   },
-  data: () => ({}),
+  data: () => ({
+    //设置是否禁用卡片
+    setDisabled: true,
+
+    //颜色选择器菜单显示与否
+    showMainColorPicker: [],
+    showMinorColorPicker: [],
+    //遮罩层显示与否
+    overlayLoading: false,
+    //消息栏
+    snackbarStatus: false,
+    snackbarCode: 200,
+    snackbarColor: 'white',
+    snackbarData: "none",
+    snackbarTimeout: 2000,
+  }),
   methods: {
+    //------------------发送snackbar，唤醒消息栏------------------
+    sendMessage(code, color, data, timeout) {
+      this.snackbarStatus = true
+      this.snackbarCode = code
+      this.snackbarColor = color
+      this.snackbarData = data
+      this.snackbarTimeout = timeout
+    },
+
+    //-------------修改操作（空操作，为了迎合保存操作）----------------
     modifyRoom() {
       this.setDisabled = false
     },
-    saveRoom(room) {
+    //-----------------------保存操作----------------------------
+    async saveRoom(userUUId, room) {
       this.setDisabled = true
       //读取数据
-
+      console.log("room: " + room)
+      //封闭操作遮罩层
+      this.overlayLoading = true
       //组装数据
-
+      room.modifyTime = getCurrentDateTime()
+      room.modifyCount += 1
+      //更新数据到数据库
+      try {
+        await updateOneRoom(userUUId, room).then(res => {
+          if (res.data.status != 200 || !res) {
+            this.sendMessage(404, 'warning', res.data.msg, 2000);
+          } else {
+            this.sendMessage(200, 'success', res.data.msg, 2000);
+            //转换状态
+            this.setDisabled = true
+          }
+        })
+      } catch (error) {
+        this.sendMessage(500, 'error', "update failed", 2000);
+        console.log("error: " + error)
+      }
+      //开放操作遮罩层
+      this.overlayLoading = false
       //更新数据到数据库
     },
-    deleteRoom(index) {
-
+    //-----------------------删除操作----------------------------
+    async deleteRoom(userUUId, roomUUId) {
+      //封闭操作遮罩层
+      this.overlayLoading = true
+      //更新数据到数据库
+      try {
+        await deleteOneRoom(userUUId, roomUUId).then(res => {
+          if (res.data.status != 200 || !res) {
+            this.sendMessage(404, 'warning', res.data.msg, 2000);
+          } else {
+            this.sendMessage(200, 'success', res.data.msg, 2000);
+          }
+        })
+      } catch (error) {
+        this.sendMessage(500, 'error', "delete failed", 2000);
+        console.log("error: " + error)
+      }
+      //转换状态
+      this.setDisabled = true
+      //开放操作遮罩层
+      this.overlayLoading = false
     },
-    duplicateRoom(index) {
+    //-----------------------复制操作----------------------------
+    async duplicateRoom(index) {
 
     },
   },

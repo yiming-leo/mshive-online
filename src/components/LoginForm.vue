@@ -32,12 +32,14 @@
                             prepend-icon="mdi-key" :append-icon="showPwd ? 'mdi-eye' : 'mdi-eye-off'"
                             :type="showPwd ? 'text' : 'password'" label="Password" placeholder="password" required>
               </v-text-field>
-              <OPTInput></OPTInput>
+              <!--OTP输入框，ref用于父向子传值-->
+              <OPTInput ref="otp_bar"></OPTInput>
             </v-col>
           </v-row>
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
+          <!--切换到注册页面-->
           <v-btn text color="vue_theme" class="font-weight-bold" @click="setRegisterFormVisible">Register Now</v-btn>
           <v-spacer></v-spacer>
           <v-slide-x-reverse-transition>
@@ -52,6 +54,7 @@
           </v-slide-x-reverse-transition>
           <v-btn color="primary" class="font-weight-bold" text @click="submit">Login</v-btn>
         </v-card-actions>
+        <!--发送验证码的消息栏-->
         <v-snackbar v-model="optSnackbar" light top>
           <div class="text-body-1">
             OTP has sent to your email/phone, please check it.
@@ -71,6 +74,7 @@
 import OPTInput from "@/components/OPTInput.vue";
 import router from "@/router";
 import {mapMutations} from "vuex";
+import {sendOTPEmail} from "@/api/userRequest/userApi";
 
 export default {
   name: "LoginForm",
@@ -126,11 +130,26 @@ export default {
         this.$refs[f].reset()
       })
     },
-    sendOPTtoUser() {
+    //点击发送OTP码
+    async sendOPTtoUser() {
       this.emailCheck()
       this.telephoneCheck()
+      this.passwordCheck()
       this.optSnackbar = true
-      console.log('sent!')
+      //将父类的email赋值到子类的email_addr上
+      this.$refs.otp_bar.email_addr = this.email
+      //发送otp验证码到用户邮箱上
+      await sendOTPEmail(this.email).then(res => {
+        console.log("sendOTPEmail")
+        console.log(res)
+        if (res.data.status != 200 || !res) {
+          this.snackbarColor = 'warning'
+        } else {
+          this.snackbarColor = 'success'
+        }
+        this.text = res.data.msg
+        this.snackbar = true
+      })
     },
     submit() {
       this.formHasErrors = false
