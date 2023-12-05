@@ -86,7 +86,6 @@ export default {
       //开放操作遮罩层
       this.overlayLoading = false
     },
-
     //----------------------新增一个Room操作--------------------------
     async addNewOneRoomCard() {
       this.haveAlreadyAddNewOneRoomCard = false

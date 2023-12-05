@@ -252,32 +252,6 @@ export default {
     },
     //-------------按roomUUId查询roomName，通识加装到roomTagList----------------
     async queryRoomListByRoomUUIds(userUUId) {
-      // try {
-      //   var furnitureListLength = this.furnitureList.length
-      //   console.log("furnitureListLength")
-      //   console.log(furnitureListLength)
-      //   //
-      //   for (let i = 0; i < furnitureListLength; i++) {
-      //     //查询
-      //     if (!this.roomUUIds.includes(this.furnitureList.at(i).refRoomId)) {
-      //       this.roomUUIds.push(this.furnitureList.at(i).refRoomId)
-      //     }
-      //   }
-      //
-      //
-      //
-      //   console.log("this.furnitureList")
-      //   console.log(this.furnitureList)
-      //   console.log("this.roomUUIds")
-      //   console.log(this.roomUUIds)
-      // } catch (error) {
-      //   if (furnitureListLength == null) {
-      //     console.log("真进去了吗？")
-      //     console.error("RU404", "room tag search failed")
-      //     this.sendMessage(404, 'warning', "room uuid list loading failed", 2000);
-      //   }
-      // }
-
       //查询所有room装载成数组给roomUUIds
       await searchAllRoom(userUUId).then(res => {
         if (res.data.status != 200 || !res) {
@@ -293,7 +267,6 @@ export default {
           console.log(this.roomUUIds)
         }
       })
-
       //根据加装的room uuid查询完整的room list
       try {
         await searchRoomListByRoomUUIds(userUUId, this.roomUUIds).then(res => {

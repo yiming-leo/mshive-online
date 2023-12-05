@@ -10,15 +10,8 @@
               <FurnitureCard :furniture-list="furnitureList" ref="furnitureCard"
                              :user-u-u-id="userUUId"
                              :userUUId="userUUId"></FurnitureCard>
-              <!--the button adding new one furniture card-->
-              <FurnitureCard :is-eager="isFurnitureCardEager" ref="furnitureCard"
-                             :user-u-u-id="userUUId"
-                             class="mt-1" :furniture-list="furnitureTemplateJSON"
-                             v-if="haveAlreadyAddNewOneFurnitureCard === false">
-              </FurnitureCard>
               <!--the add-new-one button-->
-              <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard"
-                     v-if="haveAlreadyAddNewOneFurnitureCard === true">
+              <v-btn class="my-2" color="white" @click="addNewOneFurnitureCard">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </template>
@@ -32,7 +25,8 @@
 
 import FurnitureCard from "@/components/card/FurnitureCard.vue";
 import furnitureTemplateJSON from "@/json/furniture/furnitureTemplateJSON.json"
-import {searchAllFurniture} from "@/api/furnitureRequest/furnitureApi";
+import {insertOneFurniture, searchAllFurniture} from "@/api/furnitureRequest/furnitureApi";
+import roomTemplateJSON from "@/json/room/roomTemplateJSON.json";
 
 export default {
   name: 'FurnitureView',
@@ -96,13 +90,26 @@ export default {
       //开放操作遮罩层
       this.overlayLoading = false
     },
-    //----------------------新增一条家具操作--------------------------
+    //----------------------新增一条Furniture操作--------------------------
     async addNewOneFurnitureCard() {
       this.haveAlreadyAddNewOneFurnitureCard = false
       //填写信息
-
+      //模拟一个暂时的furniture模板
+      furnitureTemplateJSON =
+          {
+            "refUserId": this.userUUId,
+            "name": "",
+            "description": "",
+            "attribute": "",
+            "mainColor": "",
+            "minorColor": "",
+            "imgUrl": "",
+            "isBookmarks": false,
+            "modifyCount": 0,
+          }
       //填完保存
-      await this.$refs.furnitureCard.saveFurniture(this.userUUId, null).then(res => {
+      console.log("prepare insertOneFurniture")
+      await insertOneFurniture(this.userUUId, furnitureTemplateJSON).then(res => {
         if (res.data.status != 200 || !res) {
           this.sendMessage(404, 'warning', res.data.message, 2000);
         } else {
@@ -110,8 +117,9 @@ export default {
         }
       })
       //保存完刷新组件（此时新数据已加载进入数据库）
-
+      await this.loadAllFurniture(this.userUUId)
     },
+    //-----------------------删除Furniture操作在FurnitureCard里面----------------------------
   },
 }
 </script>

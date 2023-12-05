@@ -66,13 +66,15 @@ export default {
     items: [],
     userUUId: '648fdfbb54b0950d00c37c2e'
   }),
+  mounted() {
+    this.bookmarkTreeRequest(this.userUUId)
+  },
   computed: {
     filter() {
       return this.caseSensitive
           ? (item, search, textKey) => item[textKey].indexOf(search) > -1
           : undefined
     },
-
   },
   methods: {
     bookmarkTreeRequest(userUUId) {
