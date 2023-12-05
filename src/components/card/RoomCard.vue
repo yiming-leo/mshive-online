@@ -126,12 +126,36 @@
                     size="64"
                 ></v-progress-circular>
               </v-overlay>
-              <!--删除按钮-->
-              <v-btn color="red" class="font-weight-bold" text @click="deleteRoom(userUUId, room.index)">
-                Delete
-              </v-btn>
+
+              <!--确认弹窗-->
+              <div class="text-center">
+                <v-dialog v-model="dialog" width="500">
+
+                  <template v-slot:activator="{ on, attrs }">
+                    <!--删除按钮-->
+                    <v-btn color="red" class="font-weight-bold" v-bind="attrs"
+                           v-on="on" text @click="dialog = true">
+                      Delete
+                    </v-btn>
+                  </template>
+
+                  <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">Double Check</v-card-title>
+                    <v-card-text>
+                      Are Your Sure to Delete {{ room.attribute }} : {{ room.name }} ?
+                    </v-card-text>
+                    <v-divider></v-divider>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="" text @click="dialog = false">No</v-btn>
+                      <v-btn color="primary" text @click="deleteRoom(userUUId, room.id)">Yes</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </div>
+
               <!--复制按钮-->
-              <v-btn color="deep-purple" class="font-weight-bold" text @click="duplicateRoom(room.index)">
+              <v-btn color="deep-purple" class="font-weight-bold" text @click="duplicateRoom(room.id)">
                 Duplicate
               </v-btn>
             </v-card-actions>
@@ -165,7 +189,7 @@
 <script>
 import AvatarUploader from "@/components/AvatarUploader.vue";
 import {getCurrentDateTime} from "@/js/generalDataConverter";
-import {deleteOneRoom, updateOneRoom} from "@/api/roomRequest/roomApi";
+import {deleteOneRoom, searchAllRoom, updateOneRoom} from "@/api/roomRequest/roomApi";
 
 
 export default {
@@ -177,6 +201,9 @@ export default {
     isEager: false,
   },
   data: () => ({
+    //再次确认对话框弹窗
+    dialog: false,
+
     //设置是否禁用卡片
     setDisabled: true,
 
@@ -206,7 +233,7 @@ export default {
     modifyRoom() {
       this.setDisabled = false
     },
-    //-----------------------保存操作----------------------------
+    //-----------------------修改保存Room操作----------------------------
     async saveRoom(userUUId, room) {
       this.setDisabled = true
       //读取数据
@@ -235,33 +262,62 @@ export default {
       this.overlayLoading = false
       //更新数据到数据库
     },
-    //-----------------------删除操作----------------------------
+    //-----------------------删除Room操作----------------------------
     async deleteRoom(userUUId, roomUUId) {
       //封闭操作遮罩层
       this.overlayLoading = true
       //更新数据到数据库
       try {
         await deleteOneRoom(userUUId, roomUUId).then(res => {
-          if (res.data.status != 200 || !res) {
-            this.sendMessage(404, 'warning', res.data.msg, 2000);
-          } else {
-            this.sendMessage(200, 'success', res.data.msg, 2000);
-          }
-        })
+              if (res.data.status != 200 || !res) {
+                this.sendMessage(404, 'warning', res.data.msg, 2000);
+              } else {
+                this.sendMessage(200, 'success', res.data.msg, 2000);
+                //刷新一遍所有数据
+
+                //------------------loadAllRoom--------------
+                //封闭操作遮罩层
+                this.overlayLoading = true
+                //搜索数据
+                try {
+                  searchAllRoom(userUUId).then(res => {
+                    if (res.data.status != 200 || !res) {
+                      this.sendMessage(404, 'warning', res.data.message, 2000);
+                    } else {
+                      //将返回data内的list数据传给roomList进行渲染
+                      this.roomList = res.data.data
+                      console.log("roomList")
+                      console.log(this.roomList)
+                      this.sendMessage(200, 'success', res.data.message, 2000);
+                    }
+                  })
+                } catch (error) {
+                  console.error("FR404", "room load failed")
+                  this.sendMessage(500, 'error', "load failed", 2000);
+                }
+                //开放操作遮罩层
+                this.overlayLoading = false
+                //------------------loadAllRoom--------------
+              }
+            }
+        )
       } catch (error) {
         this.sendMessage(500, 'error', "delete failed", 2000);
         console.log("error: " + error)
       }
+      //弹窗关闭
+      this.dialog = false
       //转换状态
       this.setDisabled = true
       //开放操作遮罩层
       this.overlayLoading = false
     },
-    //-----------------------复制操作----------------------------
+    //-----------------------复制Room操作----------------------------
     async duplicateRoom(index) {
 
     },
-  },
+  }
+  ,
 }
 </script>
 

@@ -10,15 +10,8 @@
               <RoomCard :room-list="roomList" ref="roomCard"
                         :user-u-u-id="userUUId"
                         :userUUId="userUUId"></RoomCard>
-              <!--the button adding new one room card-->
-              <RoomCard :is-eager="isRoomCardEager" ref="roomCard"
-                        :user-u-u-id="userUUId"
-                        class="mt-1" :room-list="roomTemplateJSON"
-                        v-if="haveAlreadyAddNewOneRoomCard === false">
-              </RoomCard>
               <!--the add-new-one button-->
-              <v-btn elevation="2" class="my-2" color="white" @click="addNewOneRoomCard"
-                     v-if="haveAlreadyAddNewOneRoomCard === true">
+              <v-btn elevation="2" class="my-2" color="white" @click="addNewOneRoomCard">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </template>
@@ -32,7 +25,7 @@
 
 import RoomCard from "@/components/card/RoomCard.vue";
 import roomTemplateJSON from "@/json/room/roomTemplateJSON.json"
-import {searchAllRoom} from "@/api/roomRequest/roomApi";
+import {insertOneRoom, searchAllRoom} from "@/api/roomRequest/roomApi";
 
 export default {
   name: 'RoomView',
@@ -69,7 +62,7 @@ export default {
       this.snackbarData = data
       this.snackbarTimeout = timeout
     },
-    //----------------------查询所有操作--------------------------
+    //----------------------查询所有Room操作--------------------------
     async loadAllRoom(userUUId) {
       //封闭操作遮罩层
       this.overlayLoading = true
@@ -93,12 +86,36 @@ export default {
       //开放操作遮罩层
       this.overlayLoading = false
     },
-    addNewOneRoomCard() {
+
+    //----------------------新增一个Room操作--------------------------
+    async addNewOneRoomCard() {
       this.haveAlreadyAddNewOneRoomCard = false
       //填写信息
+      //模拟一个暂时的room模板
+      roomTemplateJSON =
+          {
+            "refUserId": this.userUUId,
+            "name": "",
+            "attribute": "",
+            "mainColor": "",
+            "minorColor": "",
+            "imgUrl": "",
+            "description": "",
+            "isBookmarks": false
+          }
       //填完保存
+      console.log("prepare insertOneRoom")
+      await insertOneRoom(this.userUUId, roomTemplateJSON).then(res => {
+        if (res.data.status != 200 || !res) {
+          this.sendMessage(404, 'warning', res.data.message, 2000);
+        } else {
+          this.sendMessage(200, 'success', res.data.message, 2000);
+        }
+      })
       //保存完刷新组件（此时新数据已加载进入数据库）
+      await this.loadAllRoom(this.userUUId)
     },
+    //-----------------------删除Room操作在RoomCard里面----------------------------
   },
 }
 </script>

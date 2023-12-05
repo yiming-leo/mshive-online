@@ -64,7 +64,7 @@
                             <v-list-item-subtitle>{{ item.id }}</v-list-item-subtitle>
                           </v-col>
                           <v-col cols="1" sm align-self="center" class="rounded-lg rounded-tr-0 rounded-bl-0"
-                                 :style="`background: linear-gradient(0.45turn,`+item.main_color+`,`+item.minor_color+`)`">
+                                 :style="`background: linear-gradient(0.45turn,`+item.mainColor+`,`+item.minorColor+`)`">
                           </v-col>
                         </v-row>
                       </template>
@@ -201,7 +201,7 @@
 import AvatarUploader from "@/components/AvatarUploader.vue";
 import {deleteOneFurniture, updateOneFurniture} from "@/api/furnitureRequest/furnitureApi";
 import {getCurrentDateTime} from "@/js/generalDataConverter";
-import {searchRoomListByRoomUUIds} from "@/api/roomRequest/roomApi";
+import {searchAllRoom, searchRoomListByRoomUUIds} from "@/api/roomRequest/roomApi";
 
 
 export default {
@@ -216,6 +216,8 @@ export default {
     //设置是否禁用卡片
     setDisabled: true,
 
+    //装载刚查询完room列表的原始数据
+    roomList: [],
     //自动搜索Room词库下拉菜单模拟数据
     roomTagList: [],
     //装载此页面数据显示后所需的roomUUId，是roomTagList的前置条件
@@ -250,23 +252,50 @@ export default {
     },
     //-------------按roomUUId查询roomName，通识加装到roomTagList----------------
     async queryRoomListByRoomUUIds(userUUId) {
-      try {
-        var furnitureListLength = this.furnitureList.length
-        for (let i = 0; i < furnitureListLength; i++) {
-          //去重筛选后，push进入新的room id，以供选择器选择
-          if (!this.roomUUIds.includes(this.furnitureList.at(i).refRoomId)) {
-            this.roomUUIds.push(this.furnitureList.at(i).refRoomId)
-          }
-        }
-      } catch (error) {
-        if (furnitureListLength == null) {
-          console.error("RU404", "room tag search failed")
-          this.sendMessage(404, 'warning', "room uuid list loading failed", 2000);
-        }
-      }
+      // try {
+      //   var furnitureListLength = this.furnitureList.length
+      //   console.log("furnitureListLength")
+      //   console.log(furnitureListLength)
+      //   //
+      //   for (let i = 0; i < furnitureListLength; i++) {
+      //     //查询
+      //     if (!this.roomUUIds.includes(this.furnitureList.at(i).refRoomId)) {
+      //       this.roomUUIds.push(this.furnitureList.at(i).refRoomId)
+      //     }
+      //   }
+      //
+      //
+      //
+      //   console.log("this.furnitureList")
+      //   console.log(this.furnitureList)
+      //   console.log("this.roomUUIds")
+      //   console.log(this.roomUUIds)
+      // } catch (error) {
+      //   if (furnitureListLength == null) {
+      //     console.log("真进去了吗？")
+      //     console.error("RU404", "room tag search failed")
+      //     this.sendMessage(404, 'warning', "room uuid list loading failed", 2000);
+      //   }
+      // }
 
+      //查询所有room装载成数组给roomUUIds
+      await searchAllRoom(userUUId).then(res => {
+        if (res.data.status != 200 || !res) {
+          this.sendMessage(404, 'warning', res.data.msg, 2000);
+        } else {
+          this.roomList = res.data.data
+          console.log("this.roomList")
+          console.log(this.roomList)
+          for (let i = 0; i < this.roomList.length; i++) {
+            this.roomUUIds.push(this.roomList.at(i).id)
+          }
+          console.log("this.roomUUIds")
+          console.log(this.roomUUIds)
+        }
+      })
+
+      //根据加装的room uuid查询完整的room list
       try {
-        //根据加装的room uuid查询完整的room list
         await searchRoomListByRoomUUIds(userUUId, this.roomUUIds).then(res => {
           if (res.data.status != 200 || !res) {
             this.sendMessage(404, 'warning', res.data.msg, 2000);
@@ -283,7 +312,7 @@ export default {
           this.setDisabled = true
         })
       } catch (error) {
-        console.error("RR404", "room tag search failed")
+        console.error("RR500", "room tag search failed")
         this.sendMessage(500, 'error', "room tag search failed", 2000);
       }
     },

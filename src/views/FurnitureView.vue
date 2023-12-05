@@ -84,6 +84,8 @@ export default {
           } else {
             //将返回data内的list数据传给furnitureList进行渲染
             this.furnitureList = res.data.data
+            console.log("this.furnitureList")
+            console.log(this.furnitureList)
             this.sendMessage(200, 'success', res.data.message, 2000);
           }
         })
@@ -94,11 +96,21 @@ export default {
       //开放操作遮罩层
       this.overlayLoading = false
     },
-    addNewOneFurnitureCard() {
+    //----------------------新增一条家具操作--------------------------
+    async addNewOneFurnitureCard() {
       this.haveAlreadyAddNewOneFurnitureCard = false
       //填写信息
+
       //填完保存
+      await this.$refs.furnitureCard.saveFurniture(this.userUUId, null).then(res => {
+        if (res.data.status != 200 || !res) {
+          this.sendMessage(404, 'warning', res.data.message, 2000);
+        } else {
+          this.sendMessage(200, 'success', res.data.message, 2000);
+        }
+      })
       //保存完刷新组件（此时新数据已加载进入数据库）
+
     },
   },
 }
