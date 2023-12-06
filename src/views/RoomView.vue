@@ -80,7 +80,7 @@ export default {
           }
         })
       } catch (error) {
-        console.error("FR404", "room load failed")
+        console.error("RR404", "room load failed")
         this.sendMessage(500, 'error', "load failed", 2000);
       }
       //开放操作遮罩层

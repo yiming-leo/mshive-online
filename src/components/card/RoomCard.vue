@@ -142,7 +142,7 @@
                   <v-card>
                     <v-card-title class="text-h5 grey lighten-2">Double Check</v-card-title>
                     <v-card-text>
-                      Are Your Sure to Delete {{ room.attribute }} : {{ room.name }} ?
+                      Are Your Sure to Delete?
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
@@ -228,7 +228,6 @@ export default {
       this.snackbarData = data
       this.snackbarTimeout = timeout
     },
-
     //-------------修改操作（空操作，为了迎合保存操作）----------------
     modifyRoom() {
       //转换状态
@@ -293,7 +292,7 @@ export default {
                     }
                   })
                 } catch (error) {
-                  console.error("FR404", "room load failed")
+                  console.error("RR404", "room load failed")
                   this.sendMessage(500, 'error', "load failed", 2000);
                 }
                 //开放操作遮罩层

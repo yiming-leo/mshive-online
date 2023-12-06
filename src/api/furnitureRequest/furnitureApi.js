@@ -51,7 +51,7 @@ export function deleteOneFurniture(userUUId, furnitureUUId) {
             //post form-data
             //data写在和headers同级的config内，并且需要以data为根，内部可添加多个KV
             data: {
-                furniture_id: furnitureUUId
+                furniture_uuid: furnitureUUId
             }
         }
     )

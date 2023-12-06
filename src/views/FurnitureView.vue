@@ -30,9 +30,7 @@ import roomTemplateJSON from "@/json/room/roomTemplateJSON.json";
 
 export default {
   name: 'FurnitureView',
-  components: {
-    FurnitureCard
-  },
+  components: {FurnitureCard},
   data: () => ({
     userUUId: '648fdfbb54b0950d00c37c2e',
     haveAlreadyAddNewOneFurnitureCard: true,
