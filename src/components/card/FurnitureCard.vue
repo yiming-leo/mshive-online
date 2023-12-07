@@ -152,7 +152,7 @@
               <v-btn color="primary" class="font-weight-bold" text @click="modifyFurniture()"
                      v-if="setDisabled===true">Modify
               </v-btn>
-              <v-btn color="teal" class="font-weight-bold" text @click="saveFurniture(userUUId, furniture)"
+              <v-btn color="teal" class="font-weight-bold" text @click="saveFurniture(furniture)"
                      v-if="setDisabled===false">Save
               </v-btn>
               <v-overlay :value="overlayLoading">
@@ -321,7 +321,8 @@ export default {
     //-----------------------修改保存Furniture操作----------------------------
     async saveFurniture(userUUId, furniture) {
       //读取数据
-      console.log("furniture: " + furniture)
+      console.log("furniture")
+      console.log(furniture)
       //封闭操作遮罩层
       this.overlayLoading = true
       //组装数据

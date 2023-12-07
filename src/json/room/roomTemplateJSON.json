@@ -1,10 +1,14 @@
 [{
-  "refUserId": "",
-  "name": "",
+  "id": "",
   "attribute": "",
   "mainColor": "",
   "minorColor": "",
-  "imgUrl": "",
   "description": "",
-  "isBookmarks": false
+  "imgUrl": "",
+  "isBookmarks": false,
+  "isDeleted": false,
+  "modifyTime": "",
+  "modifyCount": 0,
+  "name": "",
+  "refUserId": ""
 }]

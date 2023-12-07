@@ -26,7 +26,6 @@
 import FurnitureCard from "@/components/card/FurnitureCard.vue";
 import furnitureTemplateJSON from "@/json/furniture/furnitureTemplateJSON.json"
 import {insertOneFurniture, searchAllFurniture} from "@/api/furnitureRequest/furnitureApi";
-import roomTemplateJSON from "@/json/room/roomTemplateJSON.json";
 
 export default {
   name: 'FurnitureView',
