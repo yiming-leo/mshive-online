@@ -46,17 +46,13 @@
                 <v-text-field v-model="stuff.id" label="UUID" disabled>
                   {{ stuff.id }}
                 </v-text-field>
-                <!--TODO 左侧上第二行：所属Room，Room随Furniture而改变，无法手动选择-->
-                <v-text-field v-model="stuff.refRoomId" label="Belong to Room" disabled dense>
-                  {{ stuff.refRoomId }}
-                </v-text-field>
                 <!--左侧上第三行：所属Stuff+自动搜索Stuff词库下拉菜单-->
                 <v-menu transition="fade-transition" :close-on-content-click="false">
                   <template #activator="{onFurniture, attrsFurniture}">
                     <v-autocomplete label="Belong to Furniture" prefix="Furniture Name: " :disabled="setDisabled"
                                     v-on="onFurniture" v-bind="attrsFurniture" no-data-text="请选择所属Furniture"
                                     v-model="stuff.refFurnitureId" :items="furnitureTagList" item-text="name"
-                                    item-value="id">
+                                    item-value="id" @change="syncCurrentRoomId(stuff)">
                       <!--此插槽是对下拉菜单中的各项进行修改，会覆盖原先数据-->
                       <template #item="{item}">
                         <v-row>
@@ -78,7 +74,7 @@
                 <v-text-field v-model="stuff.name" label="Name" :disabled="setDisabled" outlined dense>
                   {{ stuff.name }}
                 </v-text-field>
-                <!--左侧上第四行：属性-星标书签-->
+                <!--左侧上第五行：属性-星标书签-->
                 <v-row>
                   <v-col cols="9">
                     <v-text-field v-model="stuff.attribute" label="Attribute" :disabled="setDisabled" outlined dense>
@@ -220,7 +216,11 @@
 
 <script>
 import AvatarUploader from "@/components/AvatarUploader.vue";
-import {searchAllFurniture, searchFurnitureListByFurnitureUUIds} from "@/api/furnitureRequest/furnitureApi";
+import {
+  searchAllFurniture,
+  searchFurnitureListByFurnitureUUIds,
+  searchOneFurniture
+} from "@/api/furnitureRequest/furnitureApi";
 import {getCurrentDateTime} from "@/js/generalDataConverter";
 import {deleteOneStuff, searchAllStuff, updateOneStuff} from "@/api/stuffRequest/stuffApi";
 
@@ -233,6 +233,11 @@ export default {
     isEager: false,
   },
   data: () => ({
+
+    //当前左二被选中的furniture所影响的room_uuid
+    currentRefRoomIdByRefFurnitureId: "",
+    currentRefRoomNameByRefFurnitureId: "",
+
     //再次确认对话框弹窗
     dialog: false,
 
@@ -277,6 +282,23 @@ export default {
     modifyStuff() {
       this.setDisabled = false
     },
+    //TODO-------------根据选中的furniture来同步room信息，只加装给参数，不显示在前端-------------
+    async syncCurrentRoomId(stuff){
+      //根据当前的furnitureUUId查询所属的roomId和room名字
+      console.log("syncCurrentRoomId->stuff")
+      console.log(stuff)
+      this.currentRefRoomIdByRefFurnitureId = stuff.refRoomId
+      console.log("this.currentRefRoomIdByRefFurnitureId")
+      console.log(this.currentRefRoomIdByRefFurnitureId)
+      // TODO 需要后端编写一个furnitureUUId查询furniture信息的接口而不是furnitureId
+      await searchOneFurniture(furnitureUUId).then(res=>{
+        if (res.data.status != 200 || !res) {
+          this.sendMessage(404, 'warning', res.data.msg, 2000);
+        } else {
+          this.currentRefRoomIdByRefFurnitureId = res.data.data
+        }
+      })
+    },
     //-------------按roomUUId查询roomName，通识加装到roomTagList(比Furniture多了的东西)----------------
     async queryFurnitureListByFurnitureUUIds(userUUId) {
       //查询所有room装载成数组给roomUUIds
@@ -319,13 +341,15 @@ export default {
     //-----------------------修改保存Stuff操作----------------------------
     async saveStuff(userUUId, stuff) {
       //读取数据
-      console.log("stuff")
+      console.log("saveStuff->stuff")
       console.log(stuff)
       //封闭操作遮罩层
       this.overlayLoading = true
       //组装数据
       stuff.modifyTime = getCurrentDateTime()
       stuff.modifyCount += 1
+      //特别注意跨层要组装room
+      stuff.refRoomId = this.currentRefRoomIdByRefFurnitureId
       //更新数据到数据库
       try {
         await updateOneStuff(userUUId, stuff).then(res => {

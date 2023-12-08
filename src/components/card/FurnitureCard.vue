@@ -152,7 +152,7 @@
               <v-btn color="primary" class="font-weight-bold" text @click="modifyFurniture()"
                      v-if="setDisabled===true">Modify
               </v-btn>
-              <v-btn color="teal" class="font-weight-bold" text @click="saveFurniture(furniture)"
+              <v-btn color="teal" class="font-weight-bold" text @click="saveFurniture(userUUId, furniture)"
                      v-if="setDisabled===false">Save
               </v-btn>
               <v-overlay :value="overlayLoading">
