@@ -24,13 +24,13 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Overwrite gh-pages branch with dist folder
+      - name: Deploy to gh-pages
         run: |
-          git checkout gh-pages
-          git rm -rf .
-          mv dist/* .
+          git config --global user.email "yimingleo@outlook.com"
+          git config --global user.name "yiming-leo"
+          git checkout -b gh-pages-build
           git add .
-          git commit -m "Deploying latest build"
+          git commit -m "Deploy to gh-pages-build"
           git push origin gh-pages
 
 #  deploy:
