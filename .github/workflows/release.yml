@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - release
+      - gh-pages
 
 jobs:
   build:
@@ -24,27 +24,30 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
-
-  deploy:
-    name: Deploy to Server
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Locate Current Directory & User
+      - name: Overwrite gh-pages branch with dist folder
         run: |
-          id
-          set -x
-          whoami
-          ls
-          pwd
-          find -name "dist"
-          ls
-          pwd
+          git checkout gh-pages
+          git rm -rf .
+          mv dist/* .
+          git add .
+          git commit -m "Deploying latest build"
+          git push origin gh-pages
+
+#  deploy:
+#    name: Deploy to Server
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Locate Current Directory & User
+#        run: |
+#          id
+#          set -x
+#          whoami
+#          ls
+#          pwd
+#          find -name "dist"
+#          ls
+#          pwd
 #          ll -a
 
 #      - name: SCP Jar to Server
