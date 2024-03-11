@@ -59,7 +59,7 @@ export default {
       {index: 2, text: 'Im/Export', link: ""},
       {index: 3, text: 'Statistic', link: ""},
       {index: 4, text: 'Manage', link: ""},
-      {index: 5, text: 'Official Web', link: "/"},
+      {index: 5, text: 'Official Web', link: "/"}, //在method里面跳转路由
     ],
     languageList: [
       {index: 1, lang: "zh_cn", name: "简体中文", flag: "cn"},
@@ -87,7 +87,7 @@ export default {
     //
     detectOfficialWeb(index){
       if (index === 5) {
-        window.open("http://8.134.147.174:8081/")
+        window.open("https://yiming-leo.github.io/mshive-website/")
       }
     }
   }

@@ -132,24 +132,26 @@ export default {
     },
     //点击发送OTP码
     async sendOPTtoUser() {
-      this.emailCheck()
-      this.telephoneCheck()
-      this.passwordCheck()
-      this.optSnackbar = true
-      //将父类的email赋值到子类的email_addr上
-      this.$refs.otp_bar.email_addr = this.email
-      //发送otp验证码到用户邮箱上
-      await sendOTPEmail(this.email).then(res => {
-        console.log("sendOTPEmail")
-        console.log(res)
-        if (res.data.status != 200 || !res) {
-          this.snackbarColor = 'warning'
-        } else {
-          this.snackbarColor = 'success'
-        }
-        this.text = res.data.msg
-        this.snackbar = true
-      })
+      if (this.emailCheck() === true && this.telephoneCheck() && this.passwordCheck()){
+        this.optSnackbar = true
+        //将父类的email赋值到子类的email_addr上
+        this.$refs.otp_bar.email_addr = this.email
+        //发送otp验证码到用户邮箱上
+        await sendOTPEmail(this.email).then(res => {
+          console.log("sendOTPEmail")
+          console.log(res)
+          if (res.data.status != 200 || !res) {
+            this.snackbarColor = 'warning'
+          } else {
+            this.snackbarColor = 'success'
+          }
+          this.text = res.data.msg
+          this.snackbar = true
+        })
+      }
+      else {
+        // this.
+      }
     },
     submit() {
       this.formHasErrors = false
