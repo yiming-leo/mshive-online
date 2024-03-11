@@ -24,13 +24,15 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Deploy to gh-pages
+      - name: Push to branch gh-pages-build
         run: |
           git config --global user.email "yimingleo@outlook.com"
           git config --global user.name "yiming-leo"
           git checkout -b gh-pages-build
           git add .
           git push origin gh-pages-build
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_ENV_TOKEN }}
 
 #  deploy:
 #    name: Deploy to Server
