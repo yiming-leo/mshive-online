@@ -53,6 +53,15 @@ git add -A
 git commit -m 'deploy'
 git push -f https://github.com/<USERNAME>/mshive-online.git master:gh-pages
 ```
+if you meet such this following incident:
+```
+Failed to connect to github.com port 443 after 21057 ms: Couldn't connect to server
+```
+please set git proxy
+```bash
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+```
 <hr>
 
 ## 📤 Deploy to Customized Server by Github Action
