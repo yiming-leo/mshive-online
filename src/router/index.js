@@ -66,9 +66,25 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     routes
 })
-
+// 路由变化时发送页面视图
+router.afterEach((to, from) => {
+    // 调用全局的 gtag 函数为每个跟踪ID发送页面视图
+    window.dataLayer.push({
+        'event': 'pageView',
+        'page_path': to.fullPath
+    });
+    const trackingIDs = ['G-QSGX4QE2ZW'];
+    // 调用全局的 gtag 函数
+    trackingIDs.forEach(id => {
+        if (window.gtag) {
+            window.gtag('config', id, {
+                page_path: to.fullPath,
+            });
+        }
+    })
+});
 export default router

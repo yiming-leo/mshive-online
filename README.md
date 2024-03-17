@@ -1,26 +1,37 @@
-# mshive-online
+<h1>🐝Mshive-Online</h1>
+This project is worked for someone who always forget his 
+<hr>
 
-## Project setup
-```
-npm install
-```
+# ⚡Project Setup
+## 🧩Basic Requirements
+`node.js >= 16`<br>
+`vue.js == 2.6.14`
+## 🎃Use Your Own Backend Domain
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 🛠️Run Command
+1. install requirements: `npm install`
+2. run project: `npm run serve`
+3. build project: `npm run build`
+<hr>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 💎 Deployment
+## 📤 Deploy to gh-pages Branch of GitHub.io
+### ⭐ <font color='#ff6666'>!Recommend</font> Auto Deploy
+use gh-pages package to build CICD workflow on GitHub Actions<br>
+the gh-pages package is already existed in npm install requirements, you can exec command below
+#### Execute Command Below Step by Step
+1. `npm install`
+2. `npm run build`
+3. `npm run deploy`
+4. when things done, you can see the Github runner is running in Github Action Pages,
+5. Github Repo Settings -> Page -> Turn on website, use `gh-pages /root`(because when use `npm run deploy` command,
+   gh-pages package has help us to push built dist onto gh-pages branch, so you can see source code in gh-pages are the root of dist)
+6. now you can visit your website by clicking `Visit site` button on Settings -> Github Pages
+<hr>
 
-### 4. Deploy to GitHub.io
-
-#### 4.1 Customize configuration of `vue.config.js`
+### 🫢 <font color='#999999'>!Unrecommend</font> Customize Config Manually
+#### Alter `vue.config.js`
 add codes down below to `module.exports`
 ```javascript
 //Production Mode
@@ -28,18 +39,24 @@ publicPath: process.env.NODE_ENV === 'production'
         ? '/mshive-online/'
         : '/'
 ```
-<strong>Remember, when you in native development & test mode, please <font color="#ffaaaa">ANNOTATE</font> these codes<strong>
-#### 4.2 Compile & build
->npm run build
+<strong>Remember, when you in native 
+development & test mode, please <font color="#ffaaaa">ANNOTATE</font> these codes</strong>
 
-#### 4.3 Turn to `dist` folder, execute shell below
->cd dist
+#### Compile & Build
+`npm run build`
+#### Git Push
+turn to `dist` folder, execute shell below (modify your own github USERNAME)
+```bash
+cd dist
+git init
+git add -A
+git commit -m 'deploy'
+git push -f https://github.com/<USERNAME>/mshive-online.git master:gh-pages
+```
+<hr>
 
->git init
+## 📤 Deploy to Customized Server by Github Action
 
->git add -A
-
->git commit -m 'deploy'
-
-#### 4.4 Deploy https://`YOURUSERNAME`.github.io/`mshive-online`
->git push -f https://github.com/<USERNAME>/mshive-online.git master:gh-pages
+# 🎭Others
+## 🪵Customize Vue.js
+See [Configuration Reference](https://cli.vuejs.org/config/).
