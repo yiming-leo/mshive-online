@@ -10,9 +10,7 @@ export function searchRoomListByRoomUUIds(userUUId, data) {
         data,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
         }
     )
@@ -27,9 +25,7 @@ export function insertOneRoom(userUUId, data) {
         data,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
         }
     )
@@ -44,9 +40,7 @@ export function updateOneRoom(userUUId, data) {
         data,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
         }
     )
@@ -58,10 +52,7 @@ export function deleteOneRoom(userUUId, roomUUId) {
         `/room/${userUUId}/delete_one`,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
             },
             //post form-data
             //data写在和headers同级的config内，并且需要以data为根，内部可添加多个KV
@@ -80,9 +71,7 @@ export function searchOneRoom(userUUId, roomUUId) {
         `/room/${userUUId}/search_one`,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
             //get query param
             //params写在和headers同级的config内
@@ -99,9 +88,7 @@ export function searchListRoom(userUUId, roomUUId, searchSize) {
         `/room/${userUUId}/search_list`,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
             //get query param
             //params写在和headers同级的config内
@@ -119,9 +106,7 @@ export function searchAllRoom(userUUId) {
         `/room/${userUUId}/search_all`,
         {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                'Content-Type': 'application/json',
             },
             //get query param
             //params写在和headers同级的config内

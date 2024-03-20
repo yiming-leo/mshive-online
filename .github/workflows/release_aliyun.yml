@@ -1,9 +1,9 @@
-name: Release
+name: Release On Aliyun
 
 on:
   push:
     branches:
-      - release
+      - release_aliyun
 
 jobs:
   build:
