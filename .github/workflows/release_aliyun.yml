@@ -10,20 +10,21 @@ jobs:
     name: Build with NPM
     runs-on: ubuntu-latest
     steps:
+      #---------check out-------
       - name: Checkout Repository
         uses: actions/checkout@v3
-
+      #---------set up npm-------
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18.19.0'
-
+      #---------npm install-------
       - name: Install Dependencies
         run: npm install
-
+      #---------npm build-------
       - name: Build Project
         run: npm run build
-
+      #---------upload artifact to other job-------
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -35,6 +36,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      #---------receive artifact to current job-------
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: packaged-jars
+          path: target
+
       - name: Locate Current Directory & User
         run: |
           id
