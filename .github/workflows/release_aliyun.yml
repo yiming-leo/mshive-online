@@ -42,7 +42,7 @@ jobs:
         with:
           name: dist
           path: .
-
+      #---------receive artifact to current job-------
       - name: Locate Current Directory & User
         run: |
           id
@@ -53,15 +53,17 @@ jobs:
           find -name "dist"
           ls
           pwd
-#          ll -a
-
-#      - name: SCP Jar to Server
+          cd ../
+          ls
+          pwd
+      #---------scp dist to server-------
+#      - name: SCP dist to Server
 #        uses: appleboy/scp-action@master
 #        with:
 #          host: ${{ secrets.SERVER_HOST }}
-#          username: lym
+#          username: ${{ secrets.SERVER_USERNAME }}
 #          key: ${{ secrets.SERVER_SSH_KEY }}
-#          port: ${{ secrets.SERVER_PORT }}
+#          port: 22
 #          source: target/mshive-backend-0.0.1-SNAPSHOT.jar
 #          target: /mydata/project_file/mshive-backend-0.0.1-SNAPSHOT.jar
 
