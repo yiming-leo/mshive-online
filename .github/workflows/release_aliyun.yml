@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist
-          path: .
+          path: dist
       #---------receive artifact to current job-------
       - name: Locate Current Directory & User
         run: |
@@ -56,7 +56,7 @@ jobs:
           cd ../
           ls
           pwd
-      #---------scp dist to server-------
+#      #---------scp dist to server-------
 #      - name: SCP dist to Server
 #        uses: appleboy/scp-action@master
 #        with:
@@ -64,8 +64,8 @@ jobs:
 #          username: ${{ secrets.SERVER_USERNAME }}
 #          key: ${{ secrets.SERVER_SSH_KEY }}
 #          port: 22
-#          source: target/mshive-backend-0.0.1-SNAPSHOT.jar
-#          target: /mydata/project_file/mshive-backend-0.0.1-SNAPSHOT.jar
+#          source: ./dist
+#          target: /mydata/project_file/
 
 #  run:
 #    name: Run Jar on Server
@@ -76,7 +76,7 @@ jobs:
 #        uses: appleboy/ssh-action@master
 #        with:
 #          host: 47.102.196.219
-#          username: lym
+#          username: ${{ secrets.SERVER_USERNAME }}
 #          key: ${{ secrets.SERVER_SSH_KEY }}
 #          port: ${{ secrets.SERVER_PORT }}
 #          script: |
