@@ -27,8 +27,8 @@ jobs:
             echo "Failed to build Docker image mshive-frontend:latest."
             exit 1
           fi
-          
-          ls && pwd && cd ../ && ls && pwd
+
+#          ls && pwd && cd ../ && ls && pwd
       #---------Save Docker Image to Current Dir, or You Can't Find Where It Is------
       - name: Save Docker Image to Current Dir
         run: |
@@ -39,6 +39,8 @@ jobs:
       - name: Check the type of the Docker image tar file
         run: |
           file ./mshive-frontend.tar
+          ls && pwd
+
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
@@ -47,8 +49,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          tar_exec: false  # 关闭打包操作
-          source: "mshive-frontend.tar"
+          source: "./mshive-frontend.tar"
           target: "/mydata/project_file/mshive_frontend"
 
 #  deploy:
