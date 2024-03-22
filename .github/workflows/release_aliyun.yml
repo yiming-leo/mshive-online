@@ -25,6 +25,8 @@ jobs:
             echo "Failed to build Docker image mshive-frontend:latest."
             exit 1
           fi
+          
+          ll -a && pwd && cd ../ && ll -a && pwd
       #---------Build Docker Image-------
       - name: SCP Docker Image to Target Server
         uses: appleboy/scp-action@master
