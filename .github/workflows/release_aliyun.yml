@@ -30,7 +30,7 @@ jobs:
       #---------Save Docker Image to Current Dir, or You Can't Find Where It Is------
       - name: Save Docker Image to Current Dir
         run: |
-          docker save -o mshive-frontend.tar mshive-frontend:latest
+          docker save -o /tmp/mshive-frontend.tar mshive-frontend:latest
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "./*.tar"
+          source: "/tmp/mshive-frontend.tar"
           target: "/mydata/project_file/mshive_frontend/"
 
 #  deploy:
