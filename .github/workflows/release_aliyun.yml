@@ -34,7 +34,7 @@ jobs:
       - name: Check if the Docker image tar file exists
         run: |
           ls -l /tmp/mshive-frontend.tar
-          cd tmp/
+          cd /tmp
           ls -l
       - name: Check the type of the Docker image tar file
         run: |
