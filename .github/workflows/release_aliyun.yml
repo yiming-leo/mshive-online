@@ -42,7 +42,7 @@ jobs:
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         run: |
-          scp -i ${SSH_KEY} -P 22 /tmp/mshive-frontend.tar ${SERVER_USERNAME}@${SERVER_HOST}:${SERVER_TARGET_PATH}
+          scp -i SSH_KEY -P 22 /tmp/mshive-frontend.tar ${SERVER_USERNAME}@${SERVER_HOST}:${SERVER_TARGET_PATH}
         env:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
