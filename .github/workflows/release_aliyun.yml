@@ -13,6 +13,7 @@ jobs:
       #---------check out-------
       - name: Checkout Repository
         uses: actions/checkout@v3
+      - name: Mkdir
         run: mkdir ~/distfiles
       #---------Build Docker Image-------
       - name: Build Docker Image
