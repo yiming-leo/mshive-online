@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           tar_tmp_path: "./"
-          source: "./*.tar"
+          source: "./*.tar.gz"
           target: "/mydata/project_file/mshive_frontend"
 
 #  deploy:
