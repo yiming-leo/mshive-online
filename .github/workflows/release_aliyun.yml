@@ -31,6 +31,12 @@ jobs:
       - name: Save Docker Image to Current Dir
         run: |
           docker save -o /tmp/mshive-frontend.tar mshive-frontend:latest
+      - name: Check if the Docker image tar file exists
+        run: |
+          ls -l /tmp/mshive-frontend.tar
+      - name: Check the type of the Docker image tar file
+        run: |
+          file /tmp/mshive-frontend.tar
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
