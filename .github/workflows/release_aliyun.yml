@@ -26,7 +26,7 @@ jobs:
             exit 1
           fi
           
-          ll -a && pwd && cd ../ && ll -a && pwd
+          ls && pwd && cd ../ && ls && pwd
       #---------Build Docker Image-------
       - name: SCP Docker Image to Target Server
         uses: appleboy/scp-action@master
