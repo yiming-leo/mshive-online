@@ -34,6 +34,7 @@ jobs:
       - name: Check if the Docker image tar file exists
         run: |
           ls -l /tmp/mshive-frontend.tar
+          cd tmp/
           ls -l
       - name: Check the type of the Docker image tar file
         run: |
@@ -48,6 +49,12 @@ jobs:
           port: 22
           source: /tmp/mshive-frontend.tar
           target: /mydata/project_file/mshive_frontend/mshive-frontend.tar
+          script: |
+            ls -l
+            pwd
+            cd /tmp
+            ls -l
+            pwd
 
 #  deploy:
 #    name: Deploy to Server
