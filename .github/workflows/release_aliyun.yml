@@ -53,8 +53,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           tar_exec: false  # 关闭打包操作
-          source: "~/distfiles/mshive-frontend.tar"
-          target: "/mydata/project_file/mshive_frontend/mshive-frontend.tar"
+          source: "tmp/*.tar.gz"
+          target: "/mydata/project_file/mshive_frontend"
 
 #  deploy:
 #    name: Deploy to Server
