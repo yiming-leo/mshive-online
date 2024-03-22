@@ -40,6 +40,8 @@ jobs:
         run: |
           file ./mshive-frontend.tar
           ls && pwd
+          chmod a+r /tmp/mshive-frontend.tar
+          chmod a+r ./mshive-frontend.tar
 
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
