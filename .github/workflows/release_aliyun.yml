@@ -45,8 +45,8 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "/tmp/mshive-frontend.tar"
-          target: "/mydata/project_file/mshive_frontend/"
+          source: /tmp/mshive-frontend.tar
+          target: /mydata/project_file/mshive_frontend/
 
 #  deploy:
 #    name: Deploy to Server
