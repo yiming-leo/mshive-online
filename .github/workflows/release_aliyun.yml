@@ -34,6 +34,7 @@ jobs:
       - name: Check if the Docker image tar file exists
         run: |
           ls -l /tmp/mshive-frontend.tar
+          ls -l
       - name: Check the type of the Docker image tar file
         run: |
           file /tmp/mshive-frontend.tar
@@ -46,7 +47,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: /tmp/mshive-frontend.tar
-          target: /mydata/project_file/mshive_frontend/
+          target: /mydata/project_file/mshive_frontend/mshive-frontend.tar
 
 #  deploy:
 #    name: Deploy to Server
