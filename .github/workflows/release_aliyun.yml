@@ -60,6 +60,12 @@ jobs:
           file ./archive/mshive-frontend.tar
           ls && pwd
           chmod a+r ./archive/mshive-frontend.tar
+      #---------upload artifact to other job-------
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: mshive-frontend
+          path: ./archive/mshive-frontend.tar
 
   deploy_to_target_server:
     name: Deploy Docker Image.tar to Target Server
@@ -71,7 +77,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: mshive-frontend
-          path: /tmp/mshive-frontend.tar
+          path: /archive/mshive-frontend.tar
       #---------set basic runner env for receiving image.tar-------
 #      - name: Set Runner Env
 #        run: |
@@ -82,7 +88,7 @@ jobs:
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
         with:
-          source: "./archive/mshive-frontend.tar"
+          source: "./archive"
           target: "/mydata/project_file/mshive_frontend"
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
