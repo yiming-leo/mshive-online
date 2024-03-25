@@ -63,7 +63,7 @@ jobs:
 
   deploy_to_target_server:
     name: Deploy Docker Image.tar to Target Server
-    needs: dockerize_project
+    needs: verify_image
     runs-on: ubuntu-latest
     steps:
       #---------download artifact from other job-------
@@ -73,11 +73,11 @@ jobs:
           name: mshive-frontend
           path: /tmp/mshive-frontend.tar
       #---------set basic runner env for receiving image.tar-------
-      - name: Set Runner Env
-        run: |
-          mkdir -p archive
-          mv /tmp/mshive-frontend.tar ./archive/
-          file ./archive
+#      - name: Set Runner Env
+#        run: |
+#          mkdir -p archive
+#          mv /tmp/mshive-frontend.tar ./archive/
+#          file ./archive
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
