@@ -11,7 +11,7 @@ FROM nginx:latest AS production-stage
 COPY --from=build-stage /app/dist /etc/nginx/html/mshive/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY ssh/rmrf.space.pem /etc/nginx/certs/rmrf.space.key
-COPY ssh/rmrf.space.key /etc/nginx/certs/rmrf.space.pem
+COPY ssh/rmrf.space.pem /etc/nginx/certs/rmrf.space.pem
+COPY ssh/rmrf.space.key /etc/nginx/certs/rmrf.space.key
 
 CMD ["nginx", "-g", "daemon off;"]
