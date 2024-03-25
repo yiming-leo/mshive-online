@@ -60,16 +60,10 @@ jobs:
           file ./archive/mshive-frontend.tar
           ls && pwd
           chmod a+r ./archive/mshive-frontend.tar
-      #---------upload artifact to other job-------
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: mshive-frontend
-          path: ./archive/mshive-frontend.tar
 
   deploy_to_target_server:
     name: Deploy Docker Image.tar to Target Server
-    needs: verify_image
+    needs: dockerize_project
     runs-on: ubuntu-latest
     steps:
       #---------download artifact from other job-------
@@ -77,13 +71,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: mshive-frontend
-          path: /archive/mshive-frontend.tar
+          path: /tmp/mshive-frontend.tar
       #---------set basic runner env for receiving image.tar-------
-#      - name: Set Runner Env
-#        run: |
-#          mkdir -p archive
-#          mv /tmp/mshive-frontend.tar ./archive/
-#          file ./archive
+      - name: Set Runner Env
+        run: |
+          mkdir -p archive
+          mv /tmp/mshive-frontend.tar ./archive/
+          file ./archive/mshive-frontend.tar
       #---------SCP Docker Image-------
       - name: SCP Docker Image.tar to Target Server
         uses: appleboy/scp-action@master
