@@ -111,8 +111,8 @@ jobs:
             mv mshive-frontend.tar /mydata/project_file/mshive_frontend
             cd /mydata/project_file/mshive_frontend
             rm -rf archive
-      #----------Docker RUN-----------
-      - name: Docker RUN
+      #----------Docker Run-----------
+      - name: Docker Run
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -120,8 +120,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /mydata/project_file/mshive_frontend
+            docker rm -f mshive-frontend 2>/dev/null || true
+            docker rmi -f mshive-frontend 2>/dev/null || true
             docker load -i mshive-frontend.tar
-            docker run -d -p 443:443 mshive-frontend
+            docker run -d -p 443:443 --name mshive-frontend mshive-frontend
 
 
 #  ssh_set_docker_run_env:
