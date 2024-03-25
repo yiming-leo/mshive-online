@@ -120,6 +120,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /mydata/project_file/mshive_frontend
+            docker stop -f mshive-frontend 2>/dev/null || true
             docker rm -f mshive-frontend 2>/dev/null || true
             docker rmi -f mshive-frontend 2>/dev/null || true
             docker load -i mshive-frontend.tar
