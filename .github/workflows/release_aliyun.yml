@@ -124,7 +124,7 @@ jobs:
             docker rm -f mshive-frontend 2>/dev/null || true
             docker rmi -f mshive-frontend 2>/dev/null || true
             docker load -i mshive-frontend.tar
-            docker run -d -p 443:443 --name mshive-frontend mshive-frontend
+            docker run -d -p 443:443 --name mshive-frontend --network mshive_proxy mshive-frontend
 
 
 #  ssh_set_docker_run_env:
