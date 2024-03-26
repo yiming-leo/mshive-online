@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-let baseURL = 'http://47.102.196.219:8081/v1'    //接口请求的域名(生产和测试环境一般不同)
+let baseURL = 'https://cn.rmrf.space/mshive-backend/v1'    //接口请求的域名(生产和测试环境一般不同)
 
 
 /**
