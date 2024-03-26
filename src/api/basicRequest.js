@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-let baseURL = 'https://localhost:8082/v1'    //接口请求的域名(生产和测试环境一般不同)
+let baseURL = 'https://47.102.196.219:8082/v1'    //接口请求的域名(生产和测试环境一般不同)
 
 
 /**
