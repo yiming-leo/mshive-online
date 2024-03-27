@@ -3,6 +3,7 @@ FROM alpine:latest AS ssh-keygen-stage
 WORKDIR /ssh
 RUN echo "$PEM_CONTENT" > rmrf.space.pem && \
     echo "$KEY_CONTENT" > rmrf.space.key
+
 # Stage 2: 构建Vue项目
 FROM node:18.19.0 AS build-stage
 WORKDIR /app
