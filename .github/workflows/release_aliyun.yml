@@ -13,9 +13,17 @@ jobs:
       #---------check out-------
       - name: Checkout Repository
         uses: actions/checkout@v3
+      #---------Set up Docker Buildx------
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       #---------Build Docker Image-------
       - name: Build Docker Image
-        run: docker build -t mshive-frontend:latest .
+        run: |
+          docker build \
+             --build-arg PEM_CONTENT="${{ secrets.SSH_DOMAIN_PEM }}" \
+             --build-arg KEY_CONTENT="${{ secrets.SSH_DOMAIN_KEY }}" \
+             -t mshive-frontend:latest .
       #---------Check Docker Image-------
       - name: Check if where are my built Docker Image
         run: |
