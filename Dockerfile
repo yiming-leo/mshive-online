@@ -1,10 +1,12 @@
 # Stage 1: 通过构建参数读取github仓库的env变量，到dockerfile中，生成 SSH 密钥文件
 FROM alpine:latest AS ssh-keygen-stage
 WORKDIR /ssh
+
+# 这个ARG极为重要，是接收外界参数的唯一途径
 ARG PEM_CONTENT
 ARG KEY_CONTENT
 RUN echo "$PEM_CONTENT" > rmrf.space.pem && \
-    echo "$KEY_CONTENT" > rmrf.space.key
+    echo "$KEY_CONTENT" > rmrf.space.key \
 
 # 检查密钥文件内容
 RUN head -n 1 rmrf.space.pem | grep -q '^-----BEGIN CERTIFICATE-----' && \
