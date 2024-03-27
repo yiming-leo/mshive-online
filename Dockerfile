@@ -4,6 +4,10 @@ WORKDIR /ssh
 RUN echo "$PEM_CONTENT" > rmrf.space.pem && \
     echo "$KEY_CONTENT" > rmrf.space.key
 
+# 检查密钥文件内容
+RUN cat rmrf.space.pem && \
+    cat rmrf.space.key
+
 # Stage 2: 构建Vue项目
 FROM node:18.19.0 AS build-stage
 WORKDIR /app
