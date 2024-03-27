@@ -1,12 +1,14 @@
 # Stage 1: 通过构建参数读取github仓库的env变量，到dockerfile中，生成 SSH 密钥文件
 FROM alpine:latest AS ssh-keygen-stage
 WORKDIR /ssh
+ARG PEM_CONTENT
+ARG KEY_CONTENT
 RUN echo "$PEM_CONTENT" > rmrf.space.pem && \
     echo "$KEY_CONTENT" > rmrf.space.key
 
 # 检查密钥文件内容
-RUN cat rmrf.space.pem && \
-    cat rmrf.space.key
+RUN head -n 1 rmrf.space.pem | grep -q '^-----BEGIN CERTIFICATE-----' && \
+    head -n 1 rmrf.space.key | grep -q '^-----BEGIN PRIVATE KEY-----'
 
 # Stage 2: 构建Vue项目
 FROM node:18.19.0 AS build-stage
