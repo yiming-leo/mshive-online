@@ -22,13 +22,23 @@
 ### 🥇1.1.1 Native Run
 
 the following versions are required:<br>
-`node.js >= 16`<br>
-`vue.js == 2.6.14`
+`node.js >= 16`
 
 then run these command in your native env:
 
 1. install requirements: `npm install`
 2. run project: `npm run serve`
+
+### 🥈1.1.2 Server Run
+
+please jump to
+[⚽4.2.1 Use Github Action to build CI/CD Pipelines](#421-use-github-action-to-build-cicd-pipelines)
+
+### 🥉1.1.3 gh-pages Run
+
+execute one command to run on the github.io
+
+`npm run deploy`
 
 ## 🚀 1.2 Version Review
 
@@ -48,13 +58,12 @@ then run these command in your native env:
 
 ## 🧩2.1 Basic Requirements
 
-`node.js >= 16`<br> (if you want run project in native env)
-`vue.js == 2.6.14`
+`node.js >= 16` (if you want run project in native env)
 
 ## 🎃2.2 Use Your Own Backend Domain
 
 for more information of using fronted and backend project, please jump to
-[3.2 Deploy to Customized Server by Github Action](#32-deploy-to-customized-server-by-github-action)
+[🥐4.2 Deploy to Customized Server by Github Action](#42-deploy-to-customized-server-by-github-action)
 
 ## 🛠️2.3 Run Command
 
@@ -68,7 +77,11 @@ for more information of using fronted and backend project, please jump to
 
 ## 3.1 Architectures
 
-![img.png](readme/img3.png)
+the backend modules are followed:
+![img3.png](readme/img3.png)
+
+the components of whole system are followed:
+![img4.png](readme/img4.png)
 
 ## ✈️3.2 APIs
 
@@ -143,7 +156,7 @@ git config --global https.proxy http://127.0.0.1:7890
 
 ## 🥐4.2 Deploy to Customized Server by Github Action
 
-### ⚽4.2.1 <font color='#ff6666'>Recommend</font> Use Github Action to build CI/CD Pipelines
+### ⚽4.2.1 Use Github Action to build CI/CD Pipelines
 
 the total data req route is:
 ![data req diagram](readme/img1.png)
@@ -160,18 +173,18 @@ the total data req route is:
 
 Github Repo Env followed⬇️
 
-| Secrets Name            | Description                                                                                          | E.G.            |
-|-------------------------|------------------------------------------------------------------------------------------------------|-----------------|
-| NGINX_STORE_PATH        | a clean path for docker image's storage, like `/mydata/project_file`                                 | /app/data       |
-| NGINX_BACKEND_LOCATION  | web frontend path in nginx.conf                                                                      | mshive-frontend |
-| NGINX_FRONTEND_LOCATION | web frontend path in nginx.conf                                                                      | mshive-backend  |
-| ROOT_DOMAIN_NAME        | your.domain                                                                                          | baidu.com       |
-| SERVER_HOST             | public ipv4 of your server                                                                           | 127.0.0.1       |
-| SSH_CONNECT_DOMAIN      | ssh domain of your server                                                                            | ssh.baidu.com   |
-| SSH_CONNECT_USERNAME    | ssh username of your server(<b>have authority of rw & docker</b>)                                    | root            |
-| SSH_DOMAIN_KEY          | the SSL Key, one line, start with `-----BEGIN PRIVATE KEY-----`, can be found on your cloudflare.com | xxx             |
-| SSH_DOMAIN_PEM          | the SSL PEM, one line, start with `-----BEGIN CERTIFICATE-----`, can be found on your cloudflare.com | xxx             |
-| SSH_PRIVATE_KEY         | use key-gen to connect to your server with no password                                               | ssh key-gen     |
+| Secrets Name            | E.G.            | Description                                                                                          |
+|-------------------------|-----------------|------------------------------------------------------------------------------------------------------|
+| NGINX_STORE_PATH        | /app/data       | a clean path for docker image's storage, like `/mydata/project_file`                                 |
+| NGINX_BACKEND_LOCATION  | mshive-frontend | web frontend path in nginx.conf                                                                      |
+| NGINX_FRONTEND_LOCATION | mshive-backend  | web frontend path in nginx.conf                                                                      |
+| ROOT_DOMAIN_NAME        | baidu.com       | your.domain                                                                                          |
+| SERVER_HOST             | 127.0.0.1       | public ipv4 of your server                                                                           |
+| SSH_CONNECT_DOMAIN      | ssh.baidu.com   | ssh domain of your server                                                                            |
+| SSH_CONNECT_USERNAME    | root            | ssh username of your server(<b>have authority of rw & docker</b>)                                    |
+| SSH_DOMAIN_KEY          | xxx             | the SSL Key, one line, start with `-----BEGIN PRIVATE KEY-----`, can be found on your cloudflare.com |
+| SSH_DOMAIN_PEM          | xxx             | the SSL PEM, one line, start with `-----BEGIN CERTIFICATE-----`, can be found on your cloudflare.com |
+| SSH_PRIVATE_KEY         | ssh key-gen     | use key-gen to connect to your server with no password                                               |
 
 When you have prepared things which just mentioned before, and committed to your repo once, the CI/CD & Github Action
 will run automatically.
