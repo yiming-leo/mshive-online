@@ -4,9 +4,9 @@ WORKDIR /ssh
 
 # 这个ARG极为重要，是接收外界参数的唯一途径
 ARG PEM_CONTENT
-ARG PEM_FILENAME=rmrf.space.pem
+ARG PEM_FILENAME
 ARG KEY_CONTENT
-ARG KEY_FILENAME=rmrf.space.key
+ARG KEY_FILENAME
 
 RUN echo "$PEM_CONTENT" > $PEM_FILENAME && \
     echo "$KEY_CONTENT" > $KEY_FILENAME
