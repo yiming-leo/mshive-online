@@ -67,6 +67,7 @@ for more information of using fronted and backend project, please jump to
 # 🏉3. Features
 
 ## 3.1 Architectures
+
 ![img.png](readme/img3.png)
 
 ## ✈️3.2 APIs
@@ -159,15 +160,18 @@ the total data req route is:
 
 Github Repo Env followed⬇️
 
-| Secrets Name      | Description                                                                                          |
-|-------------------|------------------------------------------------------------------------------------------------------|
-| SERVER_HOST       | public ipv4 of your server                                                                           |
-| SERVER_USERNAME   | ssh username of your server(<b>have authority of rw & docker</b>)                                    |
-| SSH_DOMAIN_KEY    | the SSL Key, one line, start with `-----BEGIN PRIVATE KEY-----`, can be found on your cloudflare.com |
-| SSH_DOMAIN_PEM    | the SSL PEM, one line, start with `-----BEGIN CERTIFICATE-----`, can be found on your cloudflare.com |
-| SSH_PRIVATE_KEY   | use key-gen to connect to your server with no password                                               |
-| SERVER_STORE_PATH | a clean path for docker image's storage, like `/mydata/project_file`                                 |
-| SSH_DOMAIN_NAME   | your.domain                                                                                          |
+| Secrets Name            | Description                                                                                          | E.G.            |
+|-------------------------|------------------------------------------------------------------------------------------------------|-----------------|
+| NGINX_STORE_PATH        | a clean path for docker image's storage, like `/mydata/project_file`                                 | /app/data       |
+| NGINX_BACKEND_LOCATION  | web frontend path in nginx.conf                                                                      | mshive-frontend |
+| NGINX_FRONTEND_LOCATION | web frontend path in nginx.conf                                                                      | mshive-backend  |
+| ROOT_DOMAIN_NAME        | your.domain                                                                                          | baidu.com       |
+| SERVER_HOST             | public ipv4 of your server                                                                           | 127.0.0.1       |
+| SSH_CONNECT_DOMAIN      | ssh domain of your server                                                                            | ssh.baidu.com   |
+| SSH_CONNECT_USERNAME    | ssh username of your server(<b>have authority of rw & docker</b>)                                    | root            |
+| SSH_DOMAIN_KEY          | the SSL Key, one line, start with `-----BEGIN PRIVATE KEY-----`, can be found on your cloudflare.com | xxx             |
+| SSH_DOMAIN_PEM          | the SSL PEM, one line, start with `-----BEGIN CERTIFICATE-----`, can be found on your cloudflare.com | xxx             |
+| SSH_PRIVATE_KEY         | use key-gen to connect to your server with no password                                               | ssh key-gen     |
 
 When you have prepared things which just mentioned before, and committed to your repo once, the CI/CD & Github Action
 will run automatically.
