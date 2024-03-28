@@ -9,7 +9,7 @@ ARG KEY_CONTENT
 ARG KEY_FILENAME=rmrf.space.key
 
 RUN echo "$PEM_CONTENT" > $PEM_FILENAME && \
-    echo "$KEY_CONTENT" > $KEY_FILENAME \
+    echo "$KEY_CONTENT" > $KEY_FILENAME
 
 # 检查密钥文件内容
 RUN head -n 1 $PEM_FILENAME | grep -q '^-----BEGIN CERTIFICATE-----' && \
