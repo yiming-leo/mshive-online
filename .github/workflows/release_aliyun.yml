@@ -22,6 +22,8 @@ jobs:
           docker build \
              --build-arg PEM_CONTENT="${{ secrets.SSH_DOMAIN_PEM }}" \
              --build-arg KEY_CONTENT="${{ secrets.SSH_DOMAIN_KEY }}" \
+             --build-arg PEM_FILENAME="${{ secrets.ROOT_DOMAIN_NAME }}.pem" \
+             --build-arg KEY_FILENAME="${{ secrets.ROOT_DOMAIN_NAME }}.key" \
              -t mshive-frontend:latest .
       #---------Check Docker Image-------
       - name: Check if where are my built Docker Image

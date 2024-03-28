@@ -48,7 +48,7 @@ then run these command in your native env:
 
 ## 🧩2.1 Basic Requirements
 
-`node.js >= 16`<br>
+`node.js >= 16`<br> (if you want run project in native env)
 `vue.js == 2.6.14`
 
 ## 🎃2.2 Use Your Own Backend Domain
