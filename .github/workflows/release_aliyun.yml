@@ -91,8 +91,8 @@ jobs:
       - name: Clear Existed Env
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: ${{ secrets.SSH_CONNECT_DOMAIN }}
+          username: ${{ secrets.SSH_CONNECT_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /
@@ -106,16 +106,16 @@ jobs:
         with:
           source: "./archive"
           target: "/mydata/project_file/mshive_frontend"
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: ${{ secrets.SSH_CONNECT_DOMAIN }}
+          username: ${{ secrets.SSH_CONNECT_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
       #----------CLear Existed Env-----------
       - name: MV tar file to ../ dir
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: ${{ secrets.SSH_CONNECT_DOMAIN }}
+          username: ${{ secrets.SSH_CONNECT_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /mydata/project_file/mshive_frontend/archive/mshive-frontend.tar
@@ -126,8 +126,8 @@ jobs:
       - name: Docker Run
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: ${{ secrets.SSH_CONNECT_DOMAIN }}
+          username: ${{ secrets.SSH_CONNECT_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /mydata/project_file/mshive_frontend
