@@ -4,13 +4,16 @@ WORKDIR /ssh
 
 # 这个ARG极为重要，是接收外界参数的唯一途径
 ARG PEM_CONTENT
+ARG PEM_FILENAME=rmrf.space.pem
 ARG KEY_CONTENT
-RUN echo "$PEM_CONTENT" > rmrf.space.pem && \
-    echo "$KEY_CONTENT" > rmrf.space.key \
+ARG KEY_FILENAME=rmrf.space.key
+
+RUN echo "$PEM_CONTENT" > $PEM_FILENAME && \
+    echo "$KEY_CONTENT" > $KEY_FILENAME \
 
 # 检查密钥文件内容
-RUN head -n 1 rmrf.space.pem | grep -q '^-----BEGIN CERTIFICATE-----' && \
-    head -n 1 rmrf.space.key | grep -q '^-----BEGIN PRIVATE KEY-----'
+RUN head -n 1 $PEM_FILENAME | grep -q '^-----BEGIN CERTIFICATE-----' && \
+    head -n 1 $KEY_FILENAME | grep -q '^-----BEGIN PRIVATE KEY-----'
 
 # Stage 2: 构建Vue项目
 FROM node:18.19.0 AS build-stage
@@ -26,7 +29,7 @@ COPY --from=build-stage /app/dist /etc/nginx/html/mshive-online/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 从第一个阶段复制生成的 SSH 密钥文件到 Nginx 容器中
-COPY --from=ssh-keygen-stage /ssh/rmrf.space.pem /etc/nginx/certs/rmrf.space.pem
-COPY --from=ssh-keygen-stage /ssh/rmrf.space.key /etc/nginx/certs/rmrf.space.key
+COPY --from=ssh-keygen-stage /ssh/$PEM_FILENAME /etc/nginx/certs/$PEM_FILENAME
+COPY --from=ssh-keygen-stage /ssh/$KEY_FILENAME /etc/nginx/certs/$KEY_FILENAME
 
 CMD ["nginx", "-g", "daemon off;"]
